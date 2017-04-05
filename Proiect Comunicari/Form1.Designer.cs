@@ -307,6 +307,7 @@
             this.editPasiv.TabIndex = 27;
             this.editPasiv.Text = "Modify";
             this.editPasiv.UseVisualStyleBackColor = true;
+            this.editPasiv.Click += new System.EventHandler(this.editPasiv_Click);
             // 
             // deleteActiv
             // 

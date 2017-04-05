@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Proiect_Comunicari
 {
-    
+
     public partial class Form1 : Form
-    {   
+    {
         public Proiect proiect = new Proiect();
         public List<Operatie> presets = new List<Operatie>();
         public List<Cont> tempDebit = new List<Cont>();
@@ -27,23 +27,23 @@ namespace Proiect_Comunicari
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(PresetBox.SelectedIndex != -1)
-            {               
+            if (PresetBox.SelectedIndex != -1)
+            {
                 AddOp(presets[PresetBox.SelectedIndex]);
             }
-            
-                                        
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            if(File.Exists("G:\\proiect.bin"))
+
+            if (File.Exists("G:\\proiect.bin"))
             {
                 proiect = BinarySerialization.ReadFromBinaryFile<Proiect>("G:\\proiect.bin");
             }
-           
-            if(File.Exists("G:\\presets.bin"))
+
+            if (File.Exists("G:\\presets.bin"))
             {
                 presets = BinarySerialization.ReadFromBinaryFile<List<Operatie>>("G:\\presets.bin");
             }
@@ -51,17 +51,17 @@ namespace Proiect_Comunicari
             {
                 presets.Add(new Operatie("Custom"));
             }
-            foreach(Operatie op in presets)
+            foreach (Operatie op in presets)
             {
                 PresetBox.Items.Add(op.nume);
             }
             int i = 1;
-            foreach(Operatie op in proiect.operatii)
-            {                
+            foreach (Operatie op in proiect.operatii)
+            {
                 listaOperatii.Items.Add(i++ + " " + op.nume);
-                
+
             }
-            
+
         }
 
         public void AddOp(Operatie op)
@@ -88,7 +88,7 @@ namespace Proiect_Comunicari
             activID.Clear();
             pasivID.Clear();
             activValoare.Clear();
-            pasivValoare.Clear();           
+            pasivValoare.Clear();
         }
         private void updateListaConturi(List<Cont> from, List<Cont> to, string txt)
         {
@@ -110,11 +110,11 @@ namespace Proiect_Comunicari
             if (activ)
             {
 
-               // listActiv.Items.Add(id + " " + x + (creditActiv.Checked? " C" : " D"));
+                // listActiv.Items.Add(id + " " + x + (creditActiv.Checked? " C" : " D"));
                 if (creditActiv.Checked)
                 {
                     listActiv.Items.Add(id + " " + -x + " C");
-                    tempCredit.Add(new Cont(id, -x, true));
+                    tempCredit.Add(new Cont(id, x, true));
                 }
                 else
                 {
@@ -124,7 +124,7 @@ namespace Proiect_Comunicari
             }
             else
             {
-               // listPasiv.Items.Add(id + " " + x + (debitPasiv.Checked ? " D" : " C"));
+                // listPasiv.Items.Add(id + " " + x + (debitPasiv.Checked ? " D" : " C"));
                 if (!debitPasiv.Checked)
                 {
                     listPasiv.Items.Add(id + " " + x + " C");
@@ -133,7 +133,7 @@ namespace Proiect_Comunicari
                 else
                 {
                     listPasiv.Items.Add(id + " " + -x + " D");
-                    tempDebit.Add(new Cont(id, -x, false));
+                    tempDebit.Add(new Cont(id, x, false));
                 }
             }
         }
@@ -221,6 +221,18 @@ namespace Proiect_Comunicari
         {
             char[] array = list.Items[index].ToString().ToCharArray();
             return array[array.Length - 1] == 'D' ? true : false;
+        }
+
+        private void changeActiv(Cont cont, string txt1, string txt2)
+        {
+            listActiv.SelectedItem = cont.id.ToString() + txt1 + activValoare.Text + txt2;
+            cont.valoare = Convert.ToDouble(activValoare.Text);
+        }
+
+        private void changePasiv(Cont cont, string txt1, string txt2)
+        {
+            listPasiv.SelectedItem = cont.id.ToString() + txt1 + pasivValoare.Text + txt2;
+            cont.valoare = Convert.ToDouble(activValoare.Text);
         }
 
         private void listaOperatii_SelectedIndexChanged(object sender, EventArgs e)
@@ -370,7 +382,7 @@ namespace Proiect_Comunicari
                 tempCredit.RemoveAt(contor);
             }
         }
-
+        
         private void editActiv_Click(object sender, EventArgs e)
         {
             int index = listActiv.SelectedIndex;
@@ -382,40 +394,84 @@ namespace Proiect_Comunicari
                 {
                     contor++;
                 }
-            }           
+            }            
             if (D)
             {
                 if(debitActiv.Checked)
                 {
-                    listActiv.Items[index] = tempDebit[contor].id.ToString() + " " + activValoare.Text + " D";
-                    tempDebit[contor].valoare = Convert.ToDouble(activValoare.Text);
+                    changeActiv(tempDebit[contor], " ", " D");
                 }
                 else
                 {
-                    listActiv.Items[index] = tempDebit[contor].id.ToString() + " -" + activValoare.Text + " C";
-                    tempDebit[contor].valoare = Convert.ToDouble(activValoare.Text);
+                    changeActiv(tempDebit[contor], " -", " C");
                     tempCredit.Add(new Cont(tempDebit[contor]));
-                    tempDebit.RemoveAt(contor);
-                    updateListaConturi();
+                    tempDebit.RemoveAt(contor);                    
                 }                               
             }
             else
             {
                 if(debitActiv.Checked)
                 {
-                    listActiv.Items[index] = tempCredit[contor].id.ToString() + " " + activValoare.Text + " D";
-                    tempCredit[contor].valoare = Convert.ToDouble(activValoare.Text);
+                    changeActiv(tempCredit[contor], " ", " D");
                     tempDebit.Add(new Cont(tempCredit[contor]));
-                    tempCredit.RemoveAt(contor);
-                    updateListaConturi();
+                    tempCredit.RemoveAt(contor);                    
                 }
                 else
                 {
-                    listActiv.Items[index] = tempCredit[contor].id.ToString() + " -" + activValoare.Text + " C";
-                    tempCredit[contor].valoare = Convert.ToDouble(activValoare.Text);                    
+                    changeActiv(tempCredit[contor], " -", " C");
                 }
             }
+            updateListaConturi();
 
+        }
+
+        private void editPasiv_Click(object sender, EventArgs e)
+        {
+            int index = listPasiv.SelectedIndex;
+            bool D = debit(listPasiv, index);
+            int contor = 0;
+            for (int i = 0; i < listActiv.Items.Count; i++)
+            {
+                if (debit(listActiv, i) == D)
+                {
+                    contor++;
+                }
+            }
+            for (int i = 0; i < index; i++)
+            {
+                if (debit(listPasiv, i) == D)
+                {
+                    contor++;
+                }
+            }
+            if (D)
+            {
+                if (debitPasiv.Checked)
+                {
+                    changePasiv(tempDebit[contor], " -", " D");
+                }
+                else
+                {
+                    changePasiv(tempDebit[contor], " ", " C");
+                    tempCredit.Add(new Cont(tempDebit[contor]));
+                    tempDebit.RemoveAt(contor);
+                }
+            }
+            else
+            {
+                if (debitPasiv.Checked)
+                {
+                    changePasiv(tempCredit[contor], " -", " D");
+                    tempDebit.Add(new Cont(tempCredit[contor]));
+                    tempCredit.RemoveAt(contor);
+                    
+                }
+                else
+                {
+                    changePasiv(tempCredit[contor], " ", " C");
+                }
+            }
+            updateListaConturi();
         }
     }
     [Serializable]
