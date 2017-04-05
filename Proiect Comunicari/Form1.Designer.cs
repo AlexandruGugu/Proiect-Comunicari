@@ -191,6 +191,8 @@
             this.activValoare.Name = "activValoare";
             this.activValoare.Size = new System.Drawing.Size(100, 20);
             this.activValoare.TabIndex = 14;
+            this.activValoare.Text = "0";
+            this.activValoare.Leave += new System.EventHandler(this.activValoare_Leave);
             // 
             // pasivValoare
             // 
@@ -198,6 +200,8 @@
             this.pasivValoare.Name = "pasivValoare";
             this.pasivValoare.Size = new System.Drawing.Size(100, 20);
             this.pasivValoare.TabIndex = 15;
+            this.pasivValoare.Text = "0";
+            this.pasivValoare.Leave += new System.EventHandler(this.pasivValoare_Leave);
             // 
             // resultDebit
             // 

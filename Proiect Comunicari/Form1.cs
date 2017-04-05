@@ -87,21 +87,21 @@ namespace Proiect_Comunicari
             resultCredit.Items.Clear();
             activID.Clear();
             pasivID.Clear();
-            activValoare.Clear();
-            pasivValoare.Clear();
+            activValoare.Text = "0";
+            pasivValoare.Text = "0";
         }
-        private void updateListaConturi(List<Cont> from, List<Cont> to, string txt)
+        private void updateListaConturi(List<Cont> from, List<Cont> to, string txt1, string txt2, string txt3)
         {
             foreach (Cont cont in from)
             {
                 to.Add(new Cont(cont));
                 if (cont.activ)
                 {
-                    listActiv.Items.Add(cont.id + " " + cont.valoare + txt);
+                    listActiv.Items.Add(cont.id + txt1 + cont.valoare + txt3);
                 }
                 else
                 {
-                    listPasiv.Items.Add(cont.id + " " + cont.valoare + txt);
+                    listPasiv.Items.Add(cont.id + txt2 + cont.valoare + txt3);
                 }
             }
         }
@@ -163,8 +163,8 @@ namespace Proiect_Comunicari
             numeOp.Text = proiect.operatii[index].nume;
             tempCredit.Clear();
             tempDebit.Clear();
-            updateListaConturi(proiect.operatii[index].debit, tempDebit, " D");
-            updateListaConturi(proiect.operatii[index].credit, tempCredit, " C");
+            updateListaConturi(proiect.operatii[index].debit, tempDebit," ", " -", " D");
+            updateListaConturi(proiect.operatii[index].credit, tempCredit, " -", " ", " C");
             /*foreach (Cont cont in proiect.operatii[index].debit)
             {
                 tempDebit.Add(new Cont(cont));
@@ -202,7 +202,7 @@ namespace Proiect_Comunicari
                 }
                 else
                 {
-                    listPasiv.Items.Add(cont.id + " " + cont.valoare + " D");
+                    listPasiv.Items.Add(cont.id + " -" + cont.valoare + " D");
                 }
             }
             foreach (Cont cont in tempCredit)
@@ -213,7 +213,7 @@ namespace Proiect_Comunicari
                 }
                 else
                 {
-                    listPasiv.Items.Add(cont.id + " -" + cont.valoare + " C");
+                    listPasiv.Items.Add(cont.id + " " + cont.valoare + " C");
                 }
             }
         }
@@ -232,7 +232,7 @@ namespace Proiect_Comunicari
         private void changePasiv(Cont cont, string txt1, string txt2)
         {
             listPasiv.SelectedItem = cont.id.ToString() + txt1 + pasivValoare.Text + txt2;
-            cont.valoare = Convert.ToDouble(activValoare.Text);
+            cont.valoare = Convert.ToDouble(pasivValoare.Text);
         }
 
         private void listaOperatii_SelectedIndexChanged(object sender, EventArgs e)
@@ -394,7 +394,7 @@ namespace Proiect_Comunicari
                 {
                     contor++;
                 }
-            }            
+            }     
             if (D)
             {
                 if(debitActiv.Checked)
@@ -404,7 +404,7 @@ namespace Proiect_Comunicari
                 else
                 {
                     changeActiv(tempDebit[contor], " -", " C");
-                    tempCredit.Add(new Cont(tempDebit[contor]));
+                    tempCredit.Insert(0 ,new Cont(tempDebit[contor]));
                     tempDebit.RemoveAt(contor);                    
                 }                               
             }
@@ -413,7 +413,7 @@ namespace Proiect_Comunicari
                 if(debitActiv.Checked)
                 {
                     changeActiv(tempCredit[contor], " ", " D");
-                    tempDebit.Add(new Cont(tempCredit[contor]));
+                    tempDebit.Insert(0, new Cont(tempCredit[contor]));
                     tempCredit.RemoveAt(contor);                    
                 }
                 else
@@ -453,7 +453,7 @@ namespace Proiect_Comunicari
                 else
                 {
                     changePasiv(tempDebit[contor], " ", " C");
-                    tempCredit.Add(new Cont(tempDebit[contor]));
+                    tempCredit.Insert(tempCredit.Count, new Cont(tempDebit[contor]));
                     tempDebit.RemoveAt(contor);
                 }
             }
@@ -462,7 +462,7 @@ namespace Proiect_Comunicari
                 if (debitPasiv.Checked)
                 {
                     changePasiv(tempCredit[contor], " -", " D");
-                    tempDebit.Add(new Cont(tempCredit[contor]));
+                    tempDebit.Insert(tempDebit.Count, new Cont(tempCredit[contor]));
                     tempCredit.RemoveAt(contor);
                     
                 }
@@ -472,6 +472,16 @@ namespace Proiect_Comunicari
                 }
             }
             updateListaConturi();
+        }
+
+        private void activValoare_Leave(object sender, EventArgs e)
+        {
+            //activValoare.Text = "0";
+        }
+
+        private void pasivValoare_Leave(object sender, EventArgs e)
+        {
+            //pasivValoare.Text = "0";
         }
     }
     [Serializable]
