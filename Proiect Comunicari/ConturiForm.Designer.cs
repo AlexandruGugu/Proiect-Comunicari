@@ -1,6 +1,6 @@
 ﻿namespace Proiect_Comunicari
 {
-    partial class Form2
+    partial class ConturiForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Form2
+            // ConturiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1433, 698);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.ClientSize = new System.Drawing.Size(1437, 603);
+            this.Name = "ConturiForm";
+            this.Text = "ConturiForm";
             this.ResumeLayout(false);
 
         }

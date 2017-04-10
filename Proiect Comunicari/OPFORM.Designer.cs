@@ -1,6 +1,6 @@
 ﻿namespace Proiect_Comunicari
 {
-    partial class Form1
+    partial class OpForm
     {
         /// <summary>
         /// Required designer variable.
@@ -397,7 +397,7 @@
             this.debitPasiv.Text = "Debit";
             this.debitPasiv.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // OpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -432,8 +432,9 @@
             this.Controls.Add(this.PresetBox);
             this.Controls.Add(this.listaOperatii);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "OpForm";
             this.Text = "Pasiv";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OpForm_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.groupBox1.ResumeLayout(false);

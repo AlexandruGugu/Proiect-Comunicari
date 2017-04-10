@@ -12,17 +12,20 @@ using System.Windows.Forms;
 namespace Proiect_Comunicari
 {
 
-    public partial class Form1 : Form
+    public partial class OpForm : Form
     {
-        public Proiect proiect = new Proiect();
+        public Proiect proiect; // = new Proiect();
         public List<Operatie> presets = new List<Operatie>();
         public List<Cont> tempDebit = new List<Cont>();
         public List<Cont> tempCredit = new List<Cont>();
         public double sumaC = 0;
         public double sumaD = 0;
-        public Form1()
+
+        public OpForm(Proiect prj)
         {
             InitializeComponent();
+            proiect = prj;
+            Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,14 +41,14 @@ namespace Proiect_Comunicari
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            if (File.Exists("G:\\proiect.bin"))
+            if (File.Exists(Application.StartupPath + "\\proiect.bin"))
             {
-                proiect = BinarySerialization.ReadFromBinaryFile<Proiect>("G:\\proiect.bin");
+                proiect = BinarySerialization.ReadFromBinaryFile<Proiect>(Application.StartupPath + "\\proiect.bin");
             }
 
-            if (File.Exists("G:\\presets.bin"))
+            if (File.Exists(Application.StartupPath + "\\presets.bin"))
             {
-                presets = BinarySerialization.ReadFromBinaryFile<List<Operatie>>("G:\\presets.bin");
+                presets = BinarySerialization.ReadFromBinaryFile<List<Operatie>>(Application.StartupPath + "\\presets.bin");
             }
             else
             {
@@ -61,7 +64,7 @@ namespace Proiect_Comunicari
                 listaOperatii.Items.Add(i++ + " " + op.nume);
 
             }
-
+            
         }
 
         public void AddOp(Operatie op)
@@ -73,10 +76,11 @@ namespace Proiect_Comunicari
 
         private void Save_Click(object sender, EventArgs e)
         {
-            BinarySerialization.WriteToBinaryFile<Proiect>("G:\\proiect.bin", proiect);
+            MessageBox.Show(Application.StartupPath);
+            BinarySerialization.WriteToBinaryFile<Proiect>(Application.StartupPath + "\\proiect.bin", proiect);
         }
 
-
+        
         private void clearDisplay()
         {
             numeOp.Clear();
@@ -109,8 +113,6 @@ namespace Proiect_Comunicari
         {
             if (activ)
             {
-
-                // listActiv.Items.Add(id + " " + x + (creditActiv.Checked? " C" : " D"));
                 if (creditActiv.Checked)
                 {
                     listActiv.Items.Add(id + " " + -x + " C");
@@ -124,7 +126,6 @@ namespace Proiect_Comunicari
             }
             else
             {
-                // listPasiv.Items.Add(id + " " + x + (debitPasiv.Checked ? " D" : " C"));
                 if (!debitPasiv.Checked)
                 {
                     listPasiv.Items.Add(id + " " + x + " C");
@@ -165,30 +166,6 @@ namespace Proiect_Comunicari
             tempDebit.Clear();
             updateListaConturi(proiect.operatii[index].debit, tempDebit," ", " -", " D");
             updateListaConturi(proiect.operatii[index].credit, tempCredit, " -", " ", " C");
-            /*foreach (Cont cont in proiect.operatii[index].debit)
-            {
-                tempDebit.Add(new Cont(cont));
-                if (cont.activ)
-                {
-                    listActiv.Items.Add(cont.id + " " + cont.valoare + " D");
-                }
-                else
-                {
-                    listPasiv.Items.Add(cont.id + " " + cont.valoare + " D");
-                }
-            }
-            foreach (Cont cont in proiect.operatii[index].credit)
-            {
-                tempCredit.Add(new Cont(cont));
-                if (cont.activ)
-                {
-                    listActiv.Items.Add(cont.id + " " + cont.valoare + " C");
-                }
-                else
-                {
-                    listPasiv.Items.Add(cont.id + " " + cont.valoare + " C");
-                }
-            }*/
         }
 
         private void updateListaConturi()
@@ -483,6 +460,12 @@ namespace Proiect_Comunicari
         {
             //pasivValoare.Text = "0";
         }
+
+        private void OpForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ShadowForm.opForms.Remove(this);
+            ShadowForm.CheckActiveForms();
+        }
     }
     [Serializable]
     public class Operatie
@@ -576,6 +559,20 @@ namespace Proiect_Comunicari
         {
             
             
+        }
+    }
+    [Serializable]
+    public class LoginInfo
+    {
+        public SortedDictionary<string, string> info = new SortedDictionary<string, string>();
+
+        public bool checkInfo(KeyValuePair<string, string> kvp)
+        {
+            if (info.Contains(kvp))
+            {
+                return true;
+            }
+            return false;
         }
     }
     

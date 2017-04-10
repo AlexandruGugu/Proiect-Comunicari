@@ -10,11 +10,13 @@ using System.Windows.Forms;
 
 namespace Proiect_Comunicari
 {
-    public partial class Form2 : Form
+    public partial class ConturiForm : Form
     {
-        public Form2()
+        public Proiect proiect;
+        public ConturiForm(Proiect prj)
         {
             InitializeComponent();
+            proiect = prj;
         }
     }
 }
