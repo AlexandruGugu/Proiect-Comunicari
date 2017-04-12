@@ -81,10 +81,21 @@ namespace Proiect_Comunicari
             }
         }
 
+        static public void SaveFiles()
+        {
+            string file = Application.StartupPath + "\\Saved";
+            foreach (Proiect prj in proiecte)
+            {
+                BinarySerialization.WriteToBinaryFile<Proiect>(file + "\\" + prj.nume + ".bin", prj);
+            }
+
+        }
+
         static public void CheckActiveForms()
         {
             if( opForms.Count == 0 && contForms.Count == 0 && selectForm == null && loginForm == null)
             {
+                SaveFiles();
                 Application.Exit();
             }
         }

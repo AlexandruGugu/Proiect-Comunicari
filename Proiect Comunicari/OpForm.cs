@@ -76,7 +76,6 @@ namespace Proiect_Comunicari
 
         private void Save_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Application.StartupPath);
             BinarySerialization.WriteToBinaryFile<Proiect>(Application.StartupPath + "\\proiect.bin", proiect);
         }
 
@@ -548,12 +547,13 @@ namespace Proiect_Comunicari
     [Serializable]
     public class Proiect
     {
+        public string nume;
         public List<Operatie> operatii = new List<Operatie>();
         public List<Operatie> presets = new List<Operatie>();
         public List<Cont> Active = new List<Cont>();
         public List<Cont> Pasive = new List<Cont>();
-        int totalActive = 0;
-        int totalPasive = 0;
+        public int totalActive = 0;
+        public int totalPasive = 0;
 
         public Proiect()
         {

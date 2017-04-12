@@ -41,6 +41,7 @@
             this.userTxt.Name = "userTxt";
             this.userTxt.Size = new System.Drawing.Size(185, 20);
             this.userTxt.TabIndex = 0;
+            this.userTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.userTxt_KeyPress);
             // 
             // passTxt
             // 
@@ -48,6 +49,8 @@
             this.passTxt.Name = "passTxt";
             this.passTxt.Size = new System.Drawing.Size(185, 20);
             this.passTxt.TabIndex = 1;
+            this.passTxt.UseSystemPasswordChar = true;
+            this.passTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.passTxt_KeyPress);
             // 
             // label1
             // 

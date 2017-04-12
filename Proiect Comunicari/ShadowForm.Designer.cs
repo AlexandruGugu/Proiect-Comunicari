@@ -38,7 +38,7 @@
             this.Name = "ShadowForm";
             this.Text = "ShadowForm";
             this.ResumeLayout(false);
-
+            this.Visible = false;
         }
 
         #endregion

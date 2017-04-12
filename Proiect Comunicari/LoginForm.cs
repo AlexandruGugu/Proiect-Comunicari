@@ -37,5 +37,21 @@ namespace Proiect_Comunicari
             ShadowForm.loginForm = null;
             ShadowForm.CheckActiveForms();
         }
+
+        private void userTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(Convert.ToInt32(e.KeyChar) == 13)
+            {
+                loginButton.PerformClick();
+            }
+        }
+
+        private void passTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(Convert.ToInt32(e.KeyChar) == 13)
+            {
+                loginButton.PerformClick();
+            }
+        }
     }
 }

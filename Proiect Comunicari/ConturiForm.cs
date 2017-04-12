@@ -17,6 +17,13 @@ namespace Proiect_Comunicari
         {
             InitializeComponent();
             proiect = prj;
+            this.Show();
+        }
+
+        private void ConturiForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ShadowForm.contForms.Remove(this);
+            ShadowForm.CheckActiveForms();
         }
     }
 }

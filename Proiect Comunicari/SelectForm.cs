@@ -30,6 +30,7 @@ namespace Proiect_Comunicari
         private void addPrj_Click(object sender, EventArgs e)
         {
             ShadowForm.proiecte.Add(new Proiect());
+            ShadowForm.proiecte[ShadowForm.proiecte.Count - 1].nume = "Proiect nou " + listBox1.Items.Count;
             listBox1.Items.Add((listBox1.Items.Count + 1).ToString() + " Proiect");
         }
 
@@ -41,6 +42,13 @@ namespace Proiect_Comunicari
         private void openConturi_Click(object sender, EventArgs e)
         {
             ShadowForm.OpenConturi(listBox1.SelectedIndex);
+        }
+
+        private void delPrj_Click(object sender, EventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            listBox1.Items.RemoveAt(index);
+            ShadowForm.proiecte.RemoveAt(index);
         }
     }
 }
