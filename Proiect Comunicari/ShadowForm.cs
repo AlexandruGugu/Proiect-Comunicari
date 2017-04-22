@@ -17,13 +17,15 @@ namespace Proiect_Comunicari
         static public SelectForm selectForm = null;
         static public LoginForm loginForm = null;
 
-
+        static public Dictionary<double, string> conturiDic = new Dictionary<double, string>();
+        static public List<Cont> conturiLst = new List<Cont>();
         static public List<Proiect> proiecte = new List<Proiect>();
         //private LoginInfo loginInfo;
 
         public ShadowForm()
         {            
             InitializeComponent();
+            LoadConturi();
             loginForm = new LoginForm();
             loginForm.Show();
             LoadFiles();
@@ -97,6 +99,27 @@ namespace Proiect_Comunicari
             {
                 SaveFiles();
                 Application.Exit();
+            }
+        }
+
+        private void LoadConturi()
+        {
+            string line;
+            System.IO.StreamReader file = new System.IO.StreamReader(Application.StartupPath + "\\Data\\conturi.txt");
+            int i, j;
+            while((line = file.ReadLine()) != null)
+            {
+                i = line.IndexOf('.');
+                j = line.IndexOf('(');
+                double id = Convert.ToDouble(line.Substring(0, i + 1));
+                string nume = line.Substring(i + 2, j - i - 3);
+                bool activ = true;
+                if(line[j+1] == 'P')
+                {
+                    activ = false;
+                }
+                conturiDic.Add(id, nume);
+                conturiLst.Add(new Cont(id, 0.0, activ, nume));
             }
         }
     }

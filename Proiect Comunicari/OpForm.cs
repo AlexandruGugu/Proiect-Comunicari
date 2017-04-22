@@ -64,7 +64,7 @@ namespace Proiect_Comunicari
                 listaOperatii.Items.Add(i++ + " " + op.nume);
 
             }
-            
+            InitConturi();
         }
 
         public void AddOp(Operatie op)
@@ -110,17 +110,18 @@ namespace Proiect_Comunicari
         }
         private void addCont(double x, double id, bool activ)
         {
+            string nume = ShadowForm.conturiDic[id];
             if (activ)
             {
                 if (creditActiv.Checked)
                 {
                     listActiv.Items.Add(id + " " + -x + " C");
-                    tempCredit.Add(new Cont(id, x, true));
+                    tempCredit.Add(new Cont(id, x, true, nume));
                 }
                 else
                 {
                     listActiv.Items.Add(id + " " + x + " D");
-                    tempDebit.Add(new Cont(id, x, true));
+                    tempDebit.Add(new Cont(id, x, true, nume));
                 }
             }
             else
@@ -128,12 +129,12 @@ namespace Proiect_Comunicari
                 if (!debitPasiv.Checked)
                 {
                     listPasiv.Items.Add(id + " " + x + " C");
-                    tempCredit.Add(new Cont(id, x, false));
+                    tempCredit.Add(new Cont(id, x, false, nume));
                 }
                 else
                 {
                     listPasiv.Items.Add(id + " " + -x + " D");
-                    tempDebit.Add(new Cont(id, x, false));
+                    tempDebit.Add(new Cont(id, x, false, nume));
                 }
             }
         }
@@ -220,12 +221,27 @@ namespace Proiect_Comunicari
             
         }
 
+        private void InitConturi()
+        {
+            string line;
+            System.IO.StreamReader file = new System.IO.StreamReader(Application.StartupPath + "\\Data\\conturi.txt");
+            int i, j;
+            while ((line = file.ReadLine()) != null)
+            {
+                comboBox1.Items.Add(line);
+            }
+        }
         
         private void addActiv_Click(object sender, EventArgs e)
         {
             double id, x;
             if(double.TryParse(activValoare.Text, out x) && double.TryParse(activID.Text, out id))
             {
+                if (!ShadowForm.conturiDic.Keys.Contains(id))
+                {
+                    MessageBox.Show("Contul introdus nu exista");
+                    return;
+                }
                 addCont(x, id, true);
                 activValoare.Clear();
                 activID.Clear();
@@ -237,6 +253,11 @@ namespace Proiect_Comunicari
             double id, x;
             if (double.TryParse(pasivValoare.Text, out x) && double.TryParse(pasivID.Text, out id))
             {
+                if(!ShadowForm.conturiDic.Keys.Contains(id))
+                {
+                    MessageBox.Show("Contul introdus nu exista");
+                    return;
+                }
                 addCont(x, id, false);
                 pasivValoare.Clear();
                 pasivID.Clear();
@@ -465,6 +486,36 @@ namespace Proiect_Comunicari
             ShadowForm.opForms.Remove(this);
             ShadowForm.CheckActiveForms();
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = comboBox1.SelectedIndex;
+            Cont cont = ShadowForm.conturiLst[index];
+            if (comboBox1.SelectedItem.ToString().Contains("/"))
+            {
+                DialogResult res = MessageBox.Show("Cont de activ?", "Cont bifunctional", MessageBoxButtons.YesNoCancel);
+                if(res == DialogResult.Yes)
+                {
+                    activID.Text = cont.id.ToString();
+                }
+                else if(res == DialogResult.No)
+                {
+                    pasivID.Text = cont.id.ToString();
+                }
+            }
+            else
+            {
+                
+                if(cont.activ)
+                {
+                    activID.Text = cont.id.ToString();
+                }
+                else
+                {
+                    pasivID.Text = cont.id.ToString();          
+                }
+            }
+        }
     }
     [Serializable]
     public class Operatie
@@ -527,11 +578,12 @@ namespace Proiect_Comunicari
         public bool activ { get; set; }
         public double valoare { get; set; }
 
-        public Cont(double ID, double VALOARE, bool ACTIV)
+        public Cont(double ID, double VALOARE, bool ACTIV, string NUME = "")
         {
             id = ID;
             valoare = VALOARE;
             activ = ACTIV;
+            nume = NUME;
         }
         
         public Cont(Cont cont)

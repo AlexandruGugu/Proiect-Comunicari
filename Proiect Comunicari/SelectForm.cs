@@ -36,11 +36,19 @@ namespace Proiect_Comunicari
 
         private void openOp_Click(object sender, EventArgs e)
         {
+            if(listBox1.SelectedIndex < 0)
+            {
+                return;
+            }
             ShadowForm.OpenOp(listBox1.SelectedIndex);
         }
 
         private void openConturi_Click(object sender, EventArgs e)
         {
+            if (listBox1.SelectedIndex < 0)
+            {
+                return;
+            }
             ShadowForm.OpenConturi(listBox1.SelectedIndex);
         }
 
@@ -48,6 +56,20 @@ namespace Proiect_Comunicari
         {
             int index = listBox1.SelectedIndex;
             listBox1.Items.RemoveAt(index);
+            OpForm i;
+            ConturiForm j;
+            if ((i = ShadowForm.opForms.Find(p => ReferenceEquals(p.proiect, ShadowForm.proiecte.ElementAt(index)))) != null)
+            {
+                MessageBox.Show("Fereastra este deja deschisa");
+                i.Close();
+                ShadowForm.opForms.Remove(i);
+            }
+            if ((j = ShadowForm.contForms.Find(p => ReferenceEquals(p.proiect, ShadowForm.proiecte.ElementAt(index)))) != null)
+            {
+                MessageBox.Show("Fereastra este deja deschisa");
+                j.Close();
+                ShadowForm.contForms.Remove(j);
+            }
             ShadowForm.proiecte.RemoveAt(index);
         }
     }

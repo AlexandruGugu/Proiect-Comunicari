@@ -25,5 +25,35 @@ namespace Proiect_Comunicari
             ShadowForm.contForms.Remove(this);
             ShadowForm.CheckActiveForms();
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = comboBox1.SelectedIndex;
+            Cont cont = ShadowForm.conturiLst[index];
+            if (comboBox1.SelectedItem.ToString().Contains("/"))
+            {
+                DialogResult res = MessageBox.Show("Cont de activ?", "Cont bifunctional", MessageBoxButtons.YesNoCancel);
+                if (res == DialogResult.Yes)
+                {
+                    activID.Text = cont.id.ToString();
+                }
+                else if (res == DialogResult.No)
+                {
+                    pasivID.Text = cont.id.ToString();
+                }
+            }
+            else
+            {
+
+                if (cont.activ)
+                {
+                    activID.Text = cont.id.ToString();
+                }
+                else
+                {
+                    pasivID.Text = cont.id.ToString();
+                }
+            }
+        }
     }
 }

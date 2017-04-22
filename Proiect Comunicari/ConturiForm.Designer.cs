@@ -31,9 +31,13 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.addCont = new System.Windows.Forms.Button();
+            this.addPasiv = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.activID = new System.Windows.Forms.TextBox();
+            this.pasivValoare = new System.Windows.Forms.TextBox();
+            this.activValoare = new System.Windows.Forms.TextBox();
+            this.pasivID = new System.Windows.Forms.TextBox();
+            this.addActiv = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -55,19 +59,20 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(281, 480);
+            this.comboBox1.Location = new System.Drawing.Point(168, 487);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(582, 21);
+            this.comboBox1.Size = new System.Drawing.Size(1027, 21);
             this.comboBox1.TabIndex = 2;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // addCont
+            // addPasiv
             // 
-            this.addCont.Location = new System.Drawing.Point(1024, 477);
-            this.addCont.Name = "addCont";
-            this.addCont.Size = new System.Drawing.Size(87, 24);
-            this.addCont.TabIndex = 3;
-            this.addCont.Text = "Add";
-            this.addCont.UseVisualStyleBackColor = true;
+            this.addPasiv.Location = new System.Drawing.Point(1108, 430);
+            this.addPasiv.Name = "addPasiv";
+            this.addPasiv.Size = new System.Drawing.Size(87, 24);
+            this.addPasiv.TabIndex = 3;
+            this.addPasiv.Text = "Add";
+            this.addPasiv.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -78,21 +83,55 @@
             this.button2.Text = "Save";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // activID
             // 
-            this.textBox1.Location = new System.Drawing.Point(894, 481);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
+            this.activID.Location = new System.Drawing.Point(168, 433);
+            this.activID.Name = "activID";
+            this.activID.Size = new System.Drawing.Size(100, 20);
+            this.activID.TabIndex = 5;
+            // 
+            // pasivValoare
+            // 
+            this.pasivValoare.Location = new System.Drawing.Point(930, 433);
+            this.pasivValoare.Name = "pasivValoare";
+            this.pasivValoare.Size = new System.Drawing.Size(100, 20);
+            this.pasivValoare.TabIndex = 6;
+            // 
+            // activValoare
+            // 
+            this.activValoare.Location = new System.Drawing.Point(342, 434);
+            this.activValoare.Name = "activValoare";
+            this.activValoare.Size = new System.Drawing.Size(100, 20);
+            this.activValoare.TabIndex = 7;
+            // 
+            // pasivID
+            // 
+            this.pasivID.Location = new System.Drawing.Point(750, 433);
+            this.pasivID.Name = "pasivID";
+            this.pasivID.Size = new System.Drawing.Size(100, 20);
+            this.pasivID.TabIndex = 8;
+            // 
+            // addActiv
+            // 
+            this.addActiv.Location = new System.Drawing.Point(538, 430);
+            this.addActiv.Name = "addActiv";
+            this.addActiv.Size = new System.Drawing.Size(75, 23);
+            this.addActiv.TabIndex = 9;
+            this.addActiv.Text = "Add";
+            this.addActiv.UseVisualStyleBackColor = true;
             // 
             // ConturiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1437, 603);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.addActiv);
+            this.Controls.Add(this.pasivID);
+            this.Controls.Add(this.activValoare);
+            this.Controls.Add(this.pasivValoare);
+            this.Controls.Add(this.activID);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.addCont);
+            this.Controls.Add(this.addPasiv);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
@@ -109,8 +148,12 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button addCont;
+        private System.Windows.Forms.Button addPasiv;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox activID;
+        private System.Windows.Forms.TextBox pasivValoare;
+        private System.Windows.Forms.TextBox activValoare;
+        private System.Windows.Forms.TextBox pasivID;
+        private System.Windows.Forms.Button addActiv;
     }
 }

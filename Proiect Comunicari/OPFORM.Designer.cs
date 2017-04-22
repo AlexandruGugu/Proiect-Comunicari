@@ -119,10 +119,11 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(553, 527);
+            this.comboBox1.Location = new System.Drawing.Point(438, 527);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(523, 21);
+            this.comboBox1.Size = new System.Drawing.Size(776, 21);
             this.comboBox1.TabIndex = 5;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // listActiv
             // 
