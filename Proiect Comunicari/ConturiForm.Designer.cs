@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.listaActive = new System.Windows.Forms.ListBox();
+            this.listaPasive = new System.Windows.Forms.ListBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.addPasiv = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -40,21 +40,21 @@
             this.addActiv = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // listaActive
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(168, 63);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(445, 342);
-            this.listBox1.TabIndex = 0;
+            this.listaActive.FormattingEnabled = true;
+            this.listaActive.Location = new System.Drawing.Point(168, 63);
+            this.listaActive.Name = "listaActive";
+            this.listaActive.Size = new System.Drawing.Size(445, 342);
+            this.listaActive.TabIndex = 0;
             // 
-            // listBox2
+            // listaPasive
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(750, 63);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(445, 342);
-            this.listBox2.TabIndex = 1;
+            this.listaPasive.FormattingEnabled = true;
+            this.listaPasive.Location = new System.Drawing.Point(750, 63);
+            this.listaPasive.Name = "listaPasive";
+            this.listaPasive.Size = new System.Drawing.Size(445, 342);
+            this.listaPasive.TabIndex = 1;
             // 
             // comboBox1
             // 
@@ -73,6 +73,7 @@
             this.addPasiv.TabIndex = 3;
             this.addPasiv.Text = "Add";
             this.addPasiv.UseVisualStyleBackColor = true;
+            this.addPasiv.Click += new System.EventHandler(this.addPasiv_Click);
             // 
             // button2
             // 
@@ -119,6 +120,7 @@
             this.addActiv.TabIndex = 9;
             this.addActiv.Text = "Add";
             this.addActiv.UseVisualStyleBackColor = true;
+            this.addActiv.Click += new System.EventHandler(this.addActiv_Click);
             // 
             // ConturiForm
             // 
@@ -133,8 +135,8 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.addPasiv);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listaPasive);
+            this.Controls.Add(this.listaActive);
             this.Name = "ConturiForm";
             this.Text = "ConturiForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConturiForm_FormClosed);
@@ -145,8 +147,8 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox listaActive;
+        private System.Windows.Forms.ListBox listaPasive;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button addPasiv;
         private System.Windows.Forms.Button button2;
