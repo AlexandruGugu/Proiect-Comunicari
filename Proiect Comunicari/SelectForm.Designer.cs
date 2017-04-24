@@ -33,6 +33,7 @@
             this.openConturi = new System.Windows.Forms.Button();
             this.openOp = new System.Windows.Forms.Button();
             this.delPrj = new System.Windows.Forms.Button();
+            this.print = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -83,11 +84,22 @@
             this.delPrj.UseVisualStyleBackColor = true;
             this.delPrj.Click += new System.EventHandler(this.delPrj_Click);
             // 
+            // print
+            // 
+            this.print.Location = new System.Drawing.Point(744, 344);
+            this.print.Name = "print";
+            this.print.Size = new System.Drawing.Size(75, 23);
+            this.print.TabIndex = 5;
+            this.print.Text = "Print";
+            this.print.UseVisualStyleBackColor = true;
+            this.print.Click += new System.EventHandler(this.print_Click);
+            // 
             // SelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 498);
+            this.Controls.Add(this.print);
             this.Controls.Add(this.delPrj);
             this.Controls.Add(this.openOp);
             this.Controls.Add(this.openConturi);
@@ -107,5 +119,6 @@
         private System.Windows.Forms.Button openConturi;
         private System.Windows.Forms.Button openOp;
         private System.Windows.Forms.Button delPrj;
+        private System.Windows.Forms.Button print;
     }
 }
