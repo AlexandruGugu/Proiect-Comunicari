@@ -38,14 +38,14 @@ namespace Proiect_Comunicari
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            if (File.Exists("G:\\proiect.bin"))
+            if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "\\Save\\proiect.bin")))
             {
-                proiect = BinarySerialization.ReadFromBinaryFile<Proiect>("G:\\proiect.bin");
+                proiect = BinarySerialization.ReadFromBinaryFile<Proiect>(Path.Combine(Directory.GetCurrentDirectory(), "\\Save\\proiect.bin"));
             }
 
-            if (File.Exists("G:\\presets.bin"))
+            if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "\\Save\\presets.bin")))
             {
-                presets = BinarySerialization.ReadFromBinaryFile<List<Operatie>>("G:\\presets.bin");
+                presets = BinarySerialization.ReadFromBinaryFile<List<Operatie>>(Path.Combine(Directory.GetCurrentDirectory(), "\\Save\\presets.bin"));
             }
             else
             {
@@ -73,7 +73,7 @@ namespace Proiect_Comunicari
 
         private void Save_Click(object sender, EventArgs e)
         {
-            BinarySerialization.WriteToBinaryFile<Proiect>("G:\\proiect.bin", proiect);
+            BinarySerialization.WriteToBinaryFile<Proiect>(Path.Combine(Directory.GetCurrentDirectory(), "\\Save\\proiect.bin"), proiect);
         }
 
 
@@ -165,30 +165,6 @@ namespace Proiect_Comunicari
             tempDebit.Clear();
             updateListaConturi(proiect.operatii[index].debit, tempDebit," ", " -", " D");
             updateListaConturi(proiect.operatii[index].credit, tempCredit, " -", " ", " C");
-            /*foreach (Cont cont in proiect.operatii[index].debit)
-            {
-                tempDebit.Add(new Cont(cont));
-                if (cont.activ)
-                {
-                    listActiv.Items.Add(cont.id + " " + cont.valoare + " D");
-                }
-                else
-                {
-                    listPasiv.Items.Add(cont.id + " " + cont.valoare + " D");
-                }
-            }
-            foreach (Cont cont in proiect.operatii[index].credit)
-            {
-                tempCredit.Add(new Cont(cont));
-                if (cont.activ)
-                {
-                    listActiv.Items.Add(cont.id + " " + cont.valoare + " C");
-                }
-                else
-                {
-                    listPasiv.Items.Add(cont.id + " " + cont.valoare + " C");
-                }
-            }*/
         }
 
         private void updateListaConturi()
