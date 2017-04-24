@@ -1,6 +1,6 @@
 ﻿namespace Proiect_Comunicari
 {
-    partial class Form2
+    partial class ShadowForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // Form2
+            // ShadowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1433, 698);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.ClientSize = new System.Drawing.Size(1194, 570);
+            this.Name = "ShadowForm";
+            this.Text = "ShadowForm";
             this.ResumeLayout(false);
-
+            this.Visible = false;
         }
 
         #endregion
