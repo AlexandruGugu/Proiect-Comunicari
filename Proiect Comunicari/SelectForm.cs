@@ -98,11 +98,11 @@ namespace Proiect_Comunicari
                 i++;
                 ScrieOperatieT(op, i);             
             }
+            InchidereConturi();
         }
 
         private void DeschideCont(Cont cont, bool operatie = false)
         {
-            //titleFormat.setBorder(libxl.BorderStyle.BORDERSTYLE_MEDIUM);
             titleFormat.setBorderColor(libxl.Color.COLOR_GRAY50);
             titleFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
             titleFormat.alignV = libxl.AlignV.ALIGNV_CENTER;
@@ -115,21 +115,21 @@ namespace Proiect_Comunicari
 
             int poz = (conturiDeschise.Count + 1) * 5;
             string titlu = "D";
-            for(int i = 0; i < (20 - cont.nume.Length) / 2; i++)
+            for(int i = 0; i < (60 - cont.nume.Length) / 2; i++)
             {
                 titlu += " ";
             }
 
             titlu += cont.nume;
 
-            for (int i = 0; i < (20 - cont.nume.Length) / 2; i++)
+            for (int i = 0; i < (60 - cont.nume.Length) / 2; i++)
             {
                 titlu += " ";
             }
             titlu += "C";
             conturi.writeStr(2, poz, titlu, titleFormat);
            
-            conturi.setMerge(2, 2, poz, poz + 4);
+            conturi.setMerge(2, 2, poz, poz + 3);
             double val = cont.valoare;
 
             if (operatie)
@@ -138,12 +138,12 @@ namespace Proiect_Comunicari
             }
             if (cont.activ)
             {
-                conturi.writeStr(3, poz, "TSD:", debitFormat);
-                conturi.writeNum(3, poz + 1, val);
+                conturi.writeStr(3, poz, "SI:");
+                conturi.writeNum(3, poz + 1, val, debitFormat);
             }
             else
             {
-                conturi.writeStr(3, poz + 2, "TSC:", creditFormat);
+                conturi.writeStr(3, poz + 2, "SI:", creditFormat);
                 conturi.writeNum(3, poz + 3, val);
             }
             conturiDeschise.Add(cont.id, conturiDeschise.Count + 1);
@@ -192,6 +192,96 @@ namespace Proiect_Comunicari
                 conturi.writeNum(row, col + 1, cont.valoare);
             }
             
+        }
+
+        private void InchidereConturi()
+        {
+            bool finalDebit;
+            int col;
+            int rowD, rowC, row;
+            double rd, rc, tsd, tsc, sf;
+            //debitFormat.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+            //creditFormat.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+            //debitFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+            //creditFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+            foreach (double id in conturiDeschise.Keys )
+            {
+                rd = 0;
+                rc = 0;
+                tsd = 0;
+                tsc = 0;
+                rowD = 3;
+                rowC = 3;
+                sf = 0;
+                col = conturiDeschise[id] * 5;
+                string str = conturi.readStr(rowD, col);
+                if(conturi.readStr(rowD, col) == "SI:")
+                {
+                    tsd += conturi.readNum(rowD, col + 1);
+                    finalDebit = true;
+                    rowD++;
+                }
+                else
+                {
+                    tsc += conturi.readNum(rowC, col + 3);
+                    finalDebit = false;
+                    rowC++;
+                }
+
+                for (; conturi.cellType(rowD, col + 1) != CellType.CELLTYPE_EMPTY; rowD++)
+                {
+                    rd += conturi.readNum(rowD, col + 1);               
+                }
+
+
+
+                for (; conturi.cellType(rowC, col + 3) != CellType.CELLTYPE_EMPTY; rowC++)
+                {
+                    rc += conturi.readNum(rowC, col + 3);
+                }
+
+                row = rowD > rowC ? rowD : rowC;
+
+                tsc += rc;
+                conturi.writeStr(row, col + 2, "RC:", creditFormat);
+                conturi.writeNum(row, col + 3, rc, creditFormat);
+                conturi.writeStr(row + 1, col + 2, "TSC:", creditFormat);
+                conturi.writeNum(row + 1, col + 3, tsc, creditFormat);
+
+                tsd += rd;
+                conturi.writeStr(row, col, "RD:", debitFormat);
+                conturi.writeNum(row, col + 1, rd, debitFormat);
+                conturi.writeStr(row + 1, col, "TSD:", debitFormat);
+                conturi.writeNum(row + 1, col + 1, tsd, debitFormat);
+
+                if (tsd > tsc)
+                {
+                    finalDebit = true;
+                    sf = tsd - tsc;
+                }
+                else if (tsd < tsc)
+                {
+                    finalDebit = false;
+                    sf = tsc - tsd;
+                }
+
+                if (finalDebit)
+                {
+                    conturi.writeStr(row + 2, col, "SFD:", debitFormat);
+                    conturi.writeNum(row + 2, col + 1, sf, debitFormat);
+                }
+                else
+                {
+                    conturi.writeStr(row + 2, col + 2, "SFC:", creditFormat);
+                    conturi.writeNum(row + 2, col + 3, sf, creditFormat);
+                }
+            }
+        }
+
+        private void print_Click(object sender, EventArgs e)
+        {
+            PrintConturi();
+            book.save("test.xlsx");
         }
     }
 }
