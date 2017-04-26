@@ -20,7 +20,24 @@ namespace Proiect_Comunicari
             proiect = prj;
             this.Show();
             InitConturi();
-            DisplayConturi();
+            if(proiect.Active.Count > 0)
+            {
+                addActiv.Hide();
+                addPasiv.Hide();
+                deleteActiv.Hide();
+                deletePasiv.Hide();
+                comboBox1.Hide();
+                activID.Hide();
+                activValoare.Hide();
+                pasivID.Hide();
+                pasivValoare.Hide();
+                DisplayConturi(proiect.ActiveCurente, proiect.PasiveCurente);
+            }
+            else
+            {
+                DisplayConturi(proiect.Active, proiect.Pasive);
+            }
+            
         }
 
         private void AddCont(double valoare, double id, bool activ)
@@ -33,18 +50,18 @@ namespace Proiect_Comunicari
             {
                 proiect.Pasive.Add(new Cont(id, valoare, activ, ShadowForm.conturiDic[id]));
             }
-            DisplayConturi();
+            DisplayConturi(proiect.Active, proiect.Pasive);
         }
 
-        private void DisplayConturi()
+        private void DisplayConturi(List<Cont> conturiActive, List<Cont> conturiPasive)
         {
             listaActive.Items.Clear();
             listaPasive.Items.Clear();
-            foreach (Cont cont in proiect.Active)
+            foreach (Cont cont in conturiActive)
             {
                 listaActive.Items.Add(cont.id + " " + cont.nume + ": " + cont.valoare);
             }
-            foreach (Cont cont in proiect.Pasive)
+            foreach (Cont cont in conturiPasive)
             {
                 listaPasive.Items.Add(cont.id + " " + cont.nume + ": " + cont.valoare);
             }
@@ -63,6 +80,18 @@ namespace Proiect_Comunicari
 
         private void ConturiForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if(proiect.ActiveCurente.Count == 0)
+            {
+                foreach(Cont cont in proiect.Active)
+                {
+                    proiect.ActiveCurente.Add(new Cont(cont));
+                }
+
+                foreach(Cont cont in proiect.Pasive)
+                {
+                    proiect.PasiveCurente.Add(new Cont(cont));
+                }
+            }
             ShadowForm.contForms.Remove(this);
             ShadowForm.CheckActiveForms();
         }
@@ -146,6 +175,28 @@ namespace Proiect_Comunicari
                 pasivValoare.Clear();
                 pasivID.Clear();
             }
+        }
+
+        private void deleteActiv_Click(object sender, EventArgs e)
+        {
+            int index = listaActive.SelectedIndex;
+            if(index < 0)
+            {
+                return;
+            }
+            proiect.Active.RemoveAt(index);
+            listaActive.Items.RemoveAt(index);
+        }
+
+        private void deletePasiv_Click(object sender, EventArgs e)
+        {
+            int index = listaPasive.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+            proiect.Pasive.RemoveAt(index);
+            listaPasive.Items.RemoveAt(index);
         }
     }
 }

@@ -32,12 +32,13 @@
             this.listaPasive = new System.Windows.Forms.ListBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.addPasiv = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.activID = new System.Windows.Forms.TextBox();
             this.pasivValoare = new System.Windows.Forms.TextBox();
             this.activValoare = new System.Windows.Forms.TextBox();
             this.pasivID = new System.Windows.Forms.TextBox();
             this.addActiv = new System.Windows.Forms.Button();
+            this.deletePasiv = new System.Windows.Forms.Button();
+            this.deleteActiv = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listaActive
@@ -74,15 +75,6 @@
             this.addPasiv.Text = "Add";
             this.addPasiv.UseVisualStyleBackColor = true;
             this.addPasiv.Click += new System.EventHandler(this.addPasiv_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(645, 539);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 27);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // activID
             // 
@@ -122,17 +114,38 @@
             this.addActiv.UseVisualStyleBackColor = true;
             this.addActiv.Click += new System.EventHandler(this.addActiv_Click);
             // 
+            // deletePasiv
+            // 
+            this.deletePasiv.Location = new System.Drawing.Point(1201, 226);
+            this.deletePasiv.Name = "deletePasiv";
+            this.deletePasiv.Size = new System.Drawing.Size(75, 23);
+            this.deletePasiv.TabIndex = 10;
+            this.deletePasiv.Text = "Delete";
+            this.deletePasiv.UseVisualStyleBackColor = true;
+            this.deletePasiv.Click += new System.EventHandler(this.deletePasiv_Click);
+            // 
+            // deleteActiv
+            // 
+            this.deleteActiv.Location = new System.Drawing.Point(87, 226);
+            this.deleteActiv.Name = "deleteActiv";
+            this.deleteActiv.Size = new System.Drawing.Size(75, 23);
+            this.deleteActiv.TabIndex = 11;
+            this.deleteActiv.Text = "Delete";
+            this.deleteActiv.UseVisualStyleBackColor = true;
+            this.deleteActiv.Click += new System.EventHandler(this.deleteActiv_Click);
+            // 
             // ConturiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1437, 603);
+            this.Controls.Add(this.deleteActiv);
+            this.Controls.Add(this.deletePasiv);
             this.Controls.Add(this.addActiv);
             this.Controls.Add(this.pasivID);
             this.Controls.Add(this.activValoare);
             this.Controls.Add(this.pasivValoare);
             this.Controls.Add(this.activID);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.addPasiv);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.listaPasive);
@@ -151,11 +164,12 @@
         private System.Windows.Forms.ListBox listaPasive;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button addPasiv;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox activID;
         private System.Windows.Forms.TextBox pasivValoare;
         private System.Windows.Forms.TextBox activValoare;
         private System.Windows.Forms.TextBox pasivID;
         private System.Windows.Forms.Button addActiv;
+        private System.Windows.Forms.Button deletePasiv;
+        private System.Windows.Forms.Button deleteActiv;
     }
 }

@@ -231,6 +231,44 @@ namespace Proiect_Comunicari
                 comboBox1.Items.Add(line);
             }
         }
+
+        private void UpdateConturiCurente(Cont cont, bool debit = true)
+        {
+            bool exist = proiect.PasiveCurente.Exists(p => p.id == cont.id) || proiect.ActiveCurente.Exists(p => p.id == cont.id);
+
+            if (cont.activ)
+            {
+                if(!proiect.ActiveCurente.Exists(p => p.id == cont.id))
+                {
+                    proiect.ActiveCurente.Add(new Cont(cont.id, 0.0, cont.activ, cont.nume));
+                }
+                Cont found = proiect.ActiveCurente.Find(p => p.id == cont.id);
+                if (debit)
+                {
+                    found.valoare += cont.valoare;
+                }
+                else
+                {
+                    found.valoare -= cont.valoare;
+                }
+            }
+            else
+            {
+                if(!proiect.PasiveCurente.Exists(p => p.id == cont.id))
+                {
+                    proiect.PasiveCurente.Add(new Cont(cont.id, 0.0, cont.activ, cont.nume));
+                }
+                Cont found = proiect.PasiveCurente.Find(p => p.id == cont.id);
+                if (debit)
+                {
+                    found.valoare -= cont.valoare;
+                }
+                else
+                {
+                    found.valoare += cont.valoare;
+                }
+            }
+        }
         
         private void addActiv_Click(object sender, EventArgs e)
         {
@@ -305,10 +343,12 @@ namespace Proiect_Comunicari
             foreach (Cont cont in tempCredit)
             {
                 proiect.operatii[index].credit.Add(new Cont(cont));
+                UpdateConturiCurente(cont, false);
             }
             foreach(Cont cont in tempDebit)
             {
                 proiect.operatii[index].debit.Add(new Cont(cont));
+                UpdateConturiCurente(cont);
             }
             proiect.operatii.ElementAt(index).nume = numeOp.Text;
             listaOperatii.SelectedIndexChanged -= new EventHandler(listaOperatii_SelectedIndexChanged);
@@ -604,6 +644,8 @@ namespace Proiect_Comunicari
         public List<Operatie> presets = new List<Operatie>();
         public List<Cont> Active = new List<Cont>();
         public List<Cont> Pasive = new List<Cont>();
+        public List<Cont> ActiveCurente = new List<Cont>();
+        public List<Cont> PasiveCurente = new List<Cont>();
         public int totalActive = 0;
         public int totalPasive = 0;
 

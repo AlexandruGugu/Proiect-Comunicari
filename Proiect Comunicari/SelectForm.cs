@@ -14,10 +14,17 @@ namespace Proiect_Comunicari
     {
         private Dictionary<double, int> conturiDeschise = new Dictionary<double, int>();
         public static XmlBook book = new XmlBook();
+        public static Sheet APInitial = book.addSheet("API");
         public static Sheet conturi = book.addSheet("Conturi");
+        public static Sheet APFinal = book.addSheet("APF");
         public static Format titleFormat = book.addFormat();
         public static Format debitFormat = book.addFormat();
         public static Format creditFormat = book.addFormat();
+        public static Format FD1 = book.addFormat();
+        public static Format FD2;
+        public static Format FC1;
+        public static Format FC2 = book.addFormat();
+        public static Format tabel = book.addFormat();
 
         public SelectForm()
         {
@@ -26,7 +33,45 @@ namespace Proiect_Comunicari
             {
                 listBox1.Items.Add((listBox1.Items.Count + 1).ToString() + " Proiect");
             }
+
+            
             conturi.displayGridlines = false;
+            APInitial.displayGridlines = false;
+            APFinal.displayGridlines = false;
+
+            titleFormat.setBorderColor(libxl.Color.COLOR_GRAY50);
+            titleFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+            titleFormat.alignV = libxl.AlignV.ALIGNV_CENTER;
+            titleFormat.alignH = libxl.AlignH.ALIGNH_MERGE;
+            titleFormat.shrinkToFit = true;
+
+            debitFormat.setBorderColor(libxl.Color.COLOR_GRAY50);
+            debitFormat.borderRight = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+
+            creditFormat.setBorderColor(libxl.Color.COLOR_GRAY50);
+            creditFormat.borderLeft = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+
+            FD2 = book.addFormat(debitFormat);
+            FC1 = book.addFormat(creditFormat);
+
+            FD1.setBorderColor(libxl.Color.COLOR_GRAY50);
+            FD1.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+            FD1.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+
+            FD2.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM; 
+            FD2.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+
+            FC1.setBorderColor(libxl.Color.COLOR_GRAY50);
+            FC1.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+            FC1.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+
+            FC2.setBorderColor(libxl.Color.COLOR_GRAY50);
+            FC2.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM; 
+            FC2.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+
+            tabel.setBorder(libxl.BorderStyle.BORDERSTYLE_MEDIUM);
+            //tabel.alignH = AlignH.ALIGNH_MERGE;
+
         }
 
         private void SelectForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -103,15 +148,7 @@ namespace Proiect_Comunicari
 
         private void DeschideCont(Cont cont, bool operatie = false)
         {
-            titleFormat.setBorderColor(libxl.Color.COLOR_GRAY50);
-            titleFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
-            titleFormat.alignV = libxl.AlignV.ALIGNV_CENTER;
-
-            debitFormat.setBorderColor(libxl.Color.COLOR_GRAY50);
-            debitFormat.borderRight = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
-
-            creditFormat.setBorderColor(libxl.Color.COLOR_GRAY50);
-            creditFormat.borderLeft = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+            
 
             int poz = (conturiDeschise.Count + 1) * 5;
             string titlu = "D";
@@ -200,10 +237,7 @@ namespace Proiect_Comunicari
             int col;
             int rowD, rowC, row;
             double rd, rc, tsd, tsc, sf;
-            //debitFormat.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
-            //creditFormat.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
-            //debitFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
-            //creditFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+
             foreach (double id in conturiDeschise.Keys )
             {
                 rd = 0;
@@ -243,16 +277,16 @@ namespace Proiect_Comunicari
                 row = rowD > rowC ? rowD : rowC;
 
                 tsc += rc;
-                conturi.writeStr(row, col + 2, "RC:", creditFormat);
-                conturi.writeNum(row, col + 3, rc, creditFormat);
-                conturi.writeStr(row + 1, col + 2, "TSC:", creditFormat);
-                conturi.writeNum(row + 1, col + 3, tsc, creditFormat);
+                conturi.writeStr(row, col + 2, "RC:", FC1);
+                conturi.writeNum(row, col + 3, rc, FC2);
+                conturi.writeStr(row + 1, col + 2, "TSC:", FC1);
+                conturi.writeNum(row + 1, col + 3, tsc, FC2);
 
                 tsd += rd;
-                conturi.writeStr(row, col, "RD:", debitFormat);
-                conturi.writeNum(row, col + 1, rd, debitFormat);
-                conturi.writeStr(row + 1, col, "TSD:", debitFormat);
-                conturi.writeNum(row + 1, col + 1, tsd, debitFormat);
+                conturi.writeStr(row, col, "RD:", FD1);
+                conturi.writeNum(row, col + 1, rd, FD2);
+                conturi.writeStr(row + 1, col, "TSD:", FD1);
+                conturi.writeNum(row + 1, col + 1, tsd, FD2);
 
                 if (tsd > tsc)
                 {
@@ -267,19 +301,44 @@ namespace Proiect_Comunicari
 
                 if (finalDebit)
                 {
-                    conturi.writeStr(row + 2, col, "SFD:", debitFormat);
-                    conturi.writeNum(row + 2, col + 1, sf, debitFormat);
+                    conturi.writeStr(row + 2, col, "SFD:", FD1);
+                    conturi.writeNum(row + 2, col + 1, sf, FD2);
                 }
                 else
                 {
-                    conturi.writeStr(row + 2, col + 2, "SFC:", creditFormat);
-                    conturi.writeNum(row + 2, col + 3, sf, creditFormat);
+                    conturi.writeStr(row + 2, col + 2, "SFC:", FC1);
+                    conturi.writeNum(row + 2, col + 3, sf, FC2);
                 }
+            }
+        }
+
+        private void PrintAP(List<Cont> active, List<Cont> pasive, Sheet sheet)
+        {
+            int row = 3;
+            int col = 2;
+            
+            foreach(Cont cont in active)
+            {
+                
+                sheet.setMerge(row, row, col, col + 4);
+                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString());
+            }
+            row = 3;
+            col = 7;
+            foreach(Cont cont in pasive)
+            {
+                
+                sheet.setMerge(row, row, col, col + 4);
+                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), creditFormat);
+
             }
         }
 
         private void print_Click(object sender, EventArgs e)
         {
+            Proiect proiect = ShadowForm.proiecte.ElementAt(listBox1.SelectedIndex);
+            PrintAP(proiect.Active, proiect.Pasive, APInitial);
+            PrintAP(proiect.ActiveCurente, proiect.PasiveCurente, APFinal);
             PrintConturi();
             book.save("test.xlsx");
         }
