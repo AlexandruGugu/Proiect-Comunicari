@@ -14,7 +14,9 @@ namespace Proiect_Comunicari
     {
         private Dictionary<double, int> conturiDeschise = new Dictionary<double, int>();
         public static XmlBook book = new XmlBook();
+        public static Sheet APInitial = book.addSheet("API");
         public static Sheet conturi = book.addSheet("Conturi");
+        public static Sheet APFinal = book.addSheet("APF");
         public static Format titleFormat = book.addFormat();
         public static Format debitFormat = book.addFormat();
         public static Format creditFormat = book.addFormat();
@@ -22,6 +24,7 @@ namespace Proiect_Comunicari
         public static Format FD2;
         public static Format FC1;
         public static Format FC2 = book.addFormat();
+        public static Format tabel = book.addFormat();
 
         public SelectForm()
         {
@@ -33,6 +36,8 @@ namespace Proiect_Comunicari
 
             
             conturi.displayGridlines = false;
+            APInitial.displayGridlines = false;
+            APFinal.displayGridlines = false;
 
             titleFormat.setBorderColor(libxl.Color.COLOR_GRAY50);
             titleFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
@@ -64,9 +69,8 @@ namespace Proiect_Comunicari
             FC2.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM; 
             FC2.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
 
-
-
-
+            tabel.setBorder(libxl.BorderStyle.BORDERSTYLE_MEDIUM);
+            //tabel.alignH = AlignH.ALIGNH_MERGE;
 
         }
 
@@ -233,10 +237,7 @@ namespace Proiect_Comunicari
             int col;
             int rowD, rowC, row;
             double rd, rc, tsd, tsc, sf;
-            //debitFormat.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
-            //creditFormat.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
-            //debitFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
-            //creditFormat.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
+
             foreach (double id in conturiDeschise.Keys )
             {
                 rd = 0;
@@ -311,8 +312,33 @@ namespace Proiect_Comunicari
             }
         }
 
+        private void PrintAP(List<Cont> active, List<Cont> pasive, Sheet sheet)
+        {
+            int row = 3;
+            int col = 2;
+            
+            foreach(Cont cont in active)
+            {
+                
+                sheet.setMerge(row, row, col, col + 4);
+                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString());
+            }
+            row = 3;
+            col = 7;
+            foreach(Cont cont in pasive)
+            {
+                
+                sheet.setMerge(row, row, col, col + 4);
+                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), creditFormat);
+
+            }
+        }
+
         private void print_Click(object sender, EventArgs e)
         {
+            Proiect proiect = ShadowForm.proiecte.ElementAt(listBox1.SelectedIndex);
+            PrintAP(proiect.Active, proiect.Pasive, APInitial);
+            PrintAP(proiect.ActiveCurente, proiect.PasiveCurente, APFinal);
             PrintConturi();
             book.save("test.xlsx");
         }
