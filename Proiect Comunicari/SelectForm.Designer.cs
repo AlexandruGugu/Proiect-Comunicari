@@ -34,21 +34,25 @@
             this.openOp = new System.Windows.Forms.Button();
             this.delPrj = new System.Windows.Forms.Button();
             this.print = new System.Windows.Forms.Button();
+            this.numeFisier = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(227, 72);
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(303, 89);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(436, 251);
+            this.listBox1.Size = new System.Drawing.Size(580, 308);
             this.listBox1.TabIndex = 0;
             // 
             // addPrj
             // 
-            this.addPrj.Location = new System.Drawing.Point(381, 344);
+            this.addPrj.Location = new System.Drawing.Point(508, 423);
+            this.addPrj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.addPrj.Name = "addPrj";
-            this.addPrj.Size = new System.Drawing.Size(107, 21);
+            this.addPrj.Size = new System.Drawing.Size(143, 26);
             this.addPrj.TabIndex = 1;
             this.addPrj.Text = "New";
             this.addPrj.UseVisualStyleBackColor = true;
@@ -56,9 +60,10 @@
             // 
             // openConturi
             // 
-            this.openConturi.Location = new System.Drawing.Point(721, 149);
+            this.openConturi.Location = new System.Drawing.Point(961, 183);
+            this.openConturi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.openConturi.Name = "openConturi";
-            this.openConturi.Size = new System.Drawing.Size(132, 20);
+            this.openConturi.Size = new System.Drawing.Size(176, 25);
             this.openConturi.TabIndex = 2;
             this.openConturi.Text = "Conturi";
             this.openConturi.UseVisualStyleBackColor = true;
@@ -66,9 +71,10 @@
             // 
             // openOp
             // 
-            this.openOp.Location = new System.Drawing.Point(721, 206);
+            this.openOp.Location = new System.Drawing.Point(961, 254);
+            this.openOp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.openOp.Name = "openOp";
-            this.openOp.Size = new System.Drawing.Size(132, 21);
+            this.openOp.Size = new System.Drawing.Size(176, 26);
             this.openOp.TabIndex = 3;
             this.openOp.Text = "Operatii";
             this.openOp.UseVisualStyleBackColor = true;
@@ -76,9 +82,10 @@
             // 
             // delPrj
             // 
-            this.delPrj.Location = new System.Drawing.Point(588, 344);
+            this.delPrj.Location = new System.Drawing.Point(784, 423);
+            this.delPrj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.delPrj.Name = "delPrj";
-            this.delPrj.Size = new System.Drawing.Size(75, 23);
+            this.delPrj.Size = new System.Drawing.Size(100, 28);
             this.delPrj.TabIndex = 4;
             this.delPrj.Text = "Delete";
             this.delPrj.UseVisualStyleBackColor = true;
@@ -86,29 +93,40 @@
             // 
             // print
             // 
-            this.print.Location = new System.Drawing.Point(744, 344);
+            this.print.Location = new System.Drawing.Point(992, 423);
+            this.print.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.print.Name = "print";
-            this.print.Size = new System.Drawing.Size(75, 23);
+            this.print.Size = new System.Drawing.Size(100, 28);
             this.print.TabIndex = 5;
             this.print.Text = "Print";
             this.print.UseVisualStyleBackColor = true;
             this.print.Click += new System.EventHandler(this.print_Click);
             // 
+            // numeFisier
+            // 
+            this.numeFisier.Location = new System.Drawing.Point(1118, 423);
+            this.numeFisier.Name = "numeFisier";
+            this.numeFisier.Size = new System.Drawing.Size(169, 22);
+            this.numeFisier.TabIndex = 6;
+            // 
             // SelectForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 498);
+            this.ClientSize = new System.Drawing.Size(1523, 613);
+            this.Controls.Add(this.numeFisier);
             this.Controls.Add(this.print);
             this.Controls.Add(this.delPrj);
             this.Controls.Add(this.openOp);
             this.Controls.Add(this.openConturi);
             this.Controls.Add(this.addPrj);
             this.Controls.Add(this.listBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "SelectForm";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SelectForm_FormClosed);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -120,5 +138,6 @@
         private System.Windows.Forms.Button openOp;
         private System.Windows.Forms.Button delPrj;
         private System.Windows.Forms.Button print;
+        private System.Windows.Forms.TextBox numeFisier;
     }
 }

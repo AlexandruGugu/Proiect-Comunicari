@@ -326,8 +326,7 @@ namespace Proiect_Comunicari
             row = 3;
             col = 7;
             foreach(Cont cont in pasive)
-            {
-                
+            {                
                 sheet.setMerge(row, row, col, col + 4);
                 sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), creditFormat);
 
@@ -336,11 +335,17 @@ namespace Proiect_Comunicari
 
         private void print_Click(object sender, EventArgs e)
         {
+            if(numeFisier.Text == string.Empty)
+            {
+                MessageBox.Show("Introduceti un nume");
+                numeFisier.Focus();
+            }
+
             Proiect proiect = ShadowForm.proiecte.ElementAt(listBox1.SelectedIndex);
             PrintAP(proiect.Active, proiect.Pasive, APInitial);
             PrintAP(proiect.ActiveCurente, proiect.PasiveCurente, APFinal);
-            PrintConturi();
-            book.save("test.xlsx");
+            PrintConturi();            
+            book.save(numeFisier.Text + ".xlsx");
         }
     }
 }
