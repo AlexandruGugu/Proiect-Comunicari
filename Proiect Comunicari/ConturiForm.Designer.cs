@@ -50,7 +50,7 @@
             this.listaActive.TabIndex = 0;
             // 
             // listaPasive
-            // 
+            //
             this.listaPasive.FormattingEnabled = true;
             this.listaPasive.Location = new System.Drawing.Point(750, 63);
             this.listaPasive.Name = "listaPasive";

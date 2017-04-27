@@ -40,19 +40,13 @@ namespace Proiect_Comunicari
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            if (File.Exists(Application.StartupPath + "\\proiect.bin"))
+            if (File.Exists(Application.StartupPath + "\\Data\\presets.bin"))
             {
-                proiect = BinarySerialization.ReadFromBinaryFile<Proiect>(Application.StartupPath + "\\proiect.bin");
-            }
-
-            if (File.Exists(Application.StartupPath + "\\presets.bin"))
-            {
-                presets = BinarySerialization.ReadFromBinaryFile<List<Operatie>>(Application.StartupPath + "\\presets.bin");
+                presets = BinarySerialization.ReadFromBinaryFile<List<Operatie>>(Application.StartupPath + "\\Data\\presets.bin");
             }
             else
             {
-                presets.Add(new Operatie("Custom"));
+                presets.Add(new Operatie("Operatie noua"));
             }
             foreach (Operatie op in presets)
             {
@@ -76,12 +70,13 @@ namespace Proiect_Comunicari
 
         private void Save_Click(object sender, EventArgs e)
         {
-            BinarySerialization.WriteToBinaryFile<Proiect>(Application.StartupPath + "\\proiect.bin", proiect);
+            //BinarySerialization.WriteToBinaryFile<Proiect>(Application.StartupPath + "\\proiect.bin", proiect);
         }
 
         
         private void clearDisplay()
         {
+            descriereOp.Clear();
             numeOp.Clear();
             listActiv.Items.Clear();
             listPasiv.Items.Clear();
@@ -116,7 +111,7 @@ namespace Proiect_Comunicari
                 if (creditActiv.Checked)
                 {
                     listActiv.Items.Add(id + " " + -x + " C");
-                    tempCredit.Add(new Cont(id, x, true, nume));
+                    tempCredit.Insert(0, new Cont(id, x, true, nume));
                 }
                 else
                 {
@@ -137,6 +132,7 @@ namespace Proiect_Comunicari
                     tempDebit.Add(new Cont(id, x, false, nume));
                 }
             }
+            updateListaConturi();
         }
 
         private bool EgalitateDebitCredit()
@@ -161,6 +157,7 @@ namespace Proiect_Comunicari
         {
             clearDisplay();
             int index = listaOperatii.SelectedIndex;
+            descriereOp.Text = proiect.operatii[index].descriere;
             numeOp.Text = proiect.operatii[index].nume;
             tempCredit.Clear();
             tempDebit.Clear();
@@ -351,6 +348,7 @@ namespace Proiect_Comunicari
                 UpdateConturiCurente(cont);
             }
             proiect.operatii.ElementAt(index).nume = numeOp.Text;
+            proiect.operatii.ElementAt(index).descriere = descriereOp.Text;
             listaOperatii.SelectedIndexChanged -= new EventHandler(listaOperatii_SelectedIndexChanged);
             string nume = numeOp.Text;
             listaOperatii.Items[index] = index + 1 + " " + nume;
@@ -561,13 +559,13 @@ namespace Proiect_Comunicari
     public class Operatie
     {
         public string nume { get; set; }      
-        bool TVA { get; set; }
+        public string descriere { get; set; }
         public List<Cont> debit { get; set; }
         public List<Cont> credit { get; set; }
 
-        public Operatie(string Nume = "", bool tva = false, List<Cont> Debit = null, List<Cont> Credit = null)
+        public Operatie(string Nume = "", string Descriere = "", List<Cont> Debit = null, List<Cont> Credit = null)
         {
-            TVA = tva;
+            descriere = Descriere;
             nume = Nume;
             if(Debit == null)
             {
@@ -598,6 +596,7 @@ namespace Proiect_Comunicari
             debit = new List<Cont>();
             credit = new List<Cont>();
             nume = op.nume;
+            descriere = op.descriere;
             foreach(Cont cont in op.debit)
             {
                 debit.Add(new Cont(cont));

@@ -63,6 +63,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.creditPasiv = new System.Windows.Forms.RadioButton();
             this.debitPasiv = new System.Windows.Forms.RadioButton();
+            this.descriereOp = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -289,7 +290,7 @@
             // 
             // numeOp
             // 
-            this.numeOp.Location = new System.Drawing.Point(414, 37);
+            this.numeOp.Location = new System.Drawing.Point(383, 37);
             this.numeOp.Name = "numeOp";
             this.numeOp.Size = new System.Drawing.Size(165, 20);
             this.numeOp.TabIndex = 25;
@@ -398,11 +399,20 @@
             this.debitPasiv.Text = "Debit";
             this.debitPasiv.UseVisualStyleBackColor = true;
             // 
+            // descriereOp
+            // 
+            this.descriereOp.Location = new System.Drawing.Point(625, 37);
+            this.descriereOp.Multiline = true;
+            this.descriereOp.Name = "descriereOp";
+            this.descriereOp.Size = new System.Drawing.Size(796, 78);
+            this.descriereOp.TabIndex = 36;
+            // 
             // OpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1475, 711);
+            this.Controls.Add(this.descriereOp);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.editActiv);
@@ -484,6 +494,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton creditActiv;
         private System.Windows.Forms.RadioButton debitActiv;
+        private System.Windows.Forms.TextBox descriereOp;
     }
 }
 
