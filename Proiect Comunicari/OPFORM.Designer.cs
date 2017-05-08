@@ -33,7 +33,6 @@
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.PresetBox = new System.Windows.Forms.ComboBox();
             this.pasivID = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.listActiv = new System.Windows.Forms.ListBox();
             this.listPasiv = new System.Windows.Forms.ListBox();
@@ -64,6 +63,17 @@
             this.creditPasiv = new System.Windows.Forms.RadioButton();
             this.debitPasiv = new System.Windows.Forms.RadioButton();
             this.descriereOp = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,11 +81,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(282, 293);
+            this.button1.Location = new System.Drawing.Point(125, 265);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 21);
+            this.button1.Size = new System.Drawing.Size(150, 21);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Add";
+            this.button1.Text = "Adauga operatie noua";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -96,7 +106,7 @@
             // PresetBox
             // 
             this.PresetBox.FormattingEnabled = true;
-            this.PresetBox.Location = new System.Drawing.Point(69, 293);
+            this.PresetBox.Location = new System.Drawing.Point(29, 527);
             this.PresetBox.Name = "PresetBox";
             this.PresetBox.Size = new System.Drawing.Size(196, 21);
             this.PresetBox.TabIndex = 2;
@@ -107,15 +117,6 @@
             this.pasivID.Name = "pasivID";
             this.pasivID.Size = new System.Drawing.Size(100, 20);
             this.pasivID.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(66, 265);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Selectati operatiunea";
             // 
             // comboBox1
             // 
@@ -173,7 +174,7 @@
             this.addActiv.Name = "addActiv";
             this.addActiv.Size = new System.Drawing.Size(75, 23);
             this.addActiv.TabIndex = 12;
-            this.addActiv.Text = "Add";
+            this.addActiv.Text = "Adauga";
             this.addActiv.UseVisualStyleBackColor = true;
             this.addActiv.Click += new System.EventHandler(this.addActiv_Click);
             // 
@@ -183,7 +184,7 @@
             this.addPasiv.Name = "addPasiv";
             this.addPasiv.Size = new System.Drawing.Size(75, 23);
             this.addPasiv.TabIndex = 13;
-            this.addPasiv.Text = "Add";
+            this.addPasiv.Text = "Adauga";
             this.addPasiv.UseVisualStyleBackColor = true;
             this.addPasiv.Click += new System.EventHandler(this.addPasiv_Click);
             // 
@@ -219,31 +220,32 @@
             // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(150, 489);
+            this.Save.Location = new System.Drawing.Point(29, 498);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 17;
             this.Save.Text = "Save";
             this.Save.UseVisualStyleBackColor = true;
+            this.Save.Visible = false;
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Update
             // 
-            this.Update.Location = new System.Drawing.Point(1286, 517);
+            this.Update.Location = new System.Drawing.Point(1185, 213);
             this.Update.Name = "Update";
-            this.Update.Size = new System.Drawing.Size(75, 23);
+            this.Update.Size = new System.Drawing.Size(142, 20);
             this.Update.TabIndex = 18;
-            this.Update.Text = "Update";
+            this.Update.Text = "Verificare formula contabila";
             this.Update.UseVisualStyleBackColor = true;
             this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
             // saveConturi
             // 
-            this.saveConturi.Location = new System.Drawing.Point(1367, 517);
+            this.saveConturi.Location = new System.Drawing.Point(1314, 525);
             this.saveConturi.Name = "saveConturi";
-            this.saveConturi.Size = new System.Drawing.Size(75, 23);
+            this.saveConturi.Size = new System.Drawing.Size(81, 23);
             this.saveConturi.TabIndex = 19;
-            this.saveConturi.Text = "Save";
+            this.saveConturi.Text = "Salveaza";
             this.saveConturi.UseVisualStyleBackColor = true;
             this.saveConturi.Click += new System.EventHandler(this.saveConturi_Click);
             // 
@@ -301,7 +303,7 @@
             this.deletePasiv.Name = "deletePasiv";
             this.deletePasiv.Size = new System.Drawing.Size(75, 23);
             this.deletePasiv.TabIndex = 26;
-            this.deletePasiv.Text = "Delete";
+            this.deletePasiv.Text = "Sterge";
             this.deletePasiv.UseVisualStyleBackColor = true;
             this.deletePasiv.Click += new System.EventHandler(this.deletePasiv_Click);
             // 
@@ -309,9 +311,9 @@
             // 
             this.editPasiv.Location = new System.Drawing.Point(1082, 292);
             this.editPasiv.Name = "editPasiv";
-            this.editPasiv.Size = new System.Drawing.Size(75, 23);
+            this.editPasiv.Size = new System.Drawing.Size(75, 35);
             this.editPasiv.TabIndex = 27;
-            this.editPasiv.Text = "Modify";
+            this.editPasiv.Text = "Modifica valoarea";
             this.editPasiv.UseVisualStyleBackColor = true;
             this.editPasiv.Click += new System.EventHandler(this.editPasiv_Click);
             // 
@@ -321,7 +323,7 @@
             this.deleteActiv.Name = "deleteActiv";
             this.deleteActiv.Size = new System.Drawing.Size(75, 23);
             this.deleteActiv.TabIndex = 28;
-            this.deleteActiv.Text = "Delete";
+            this.deleteActiv.Text = "Sterge";
             this.deleteActiv.UseVisualStyleBackColor = true;
             this.deleteActiv.Click += new System.EventHandler(this.deleteActiv_Click);
             // 
@@ -329,9 +331,9 @@
             // 
             this.editActiv.Location = new System.Drawing.Point(767, 292);
             this.editActiv.Name = "editActiv";
-            this.editActiv.Size = new System.Drawing.Size(75, 23);
+            this.editActiv.Size = new System.Drawing.Size(75, 35);
             this.editActiv.TabIndex = 29;
-            this.editActiv.Text = "Modify";
+            this.editActiv.Text = "Modifica valoarea";
             this.editActiv.UseVisualStyleBackColor = true;
             this.editActiv.Click += new System.EventHandler(this.editActiv_Click);
             // 
@@ -407,11 +409,121 @@
             this.descriereOp.Size = new System.Drawing.Size(796, 78);
             this.descriereOp.TabIndex = 36;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1182, 250);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 37;
+            this.label1.Text = "Debit";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1283, 250);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 13);
+            this.label4.TabIndex = 38;
+            this.label4.Text = "Credit";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1398, 250);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.TabIndex = 39;
+            this.label5.Text = "Total";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(690, 375);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.TabIndex = 40;
+            this.label6.Text = "valoare";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(570, 375);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 13);
+            this.label7.TabIndex = 41;
+            this.label7.Text = "numar cont";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(896, 375);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 13);
+            this.label8.TabIndex = 42;
+            this.label8.Text = "numar cont";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(1011, 375);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(42, 13);
+            this.label9.TabIndex = 43;
+            this.label9.Text = "valoare";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(723, 503);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(277, 13);
+            this.label10.TabIndex = 44;
+            this.label10.Text = "Lista denumiri conturi, conform planului de conturi general";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(419, 21);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(84, 13);
+            this.label11.TabIndex = 45;
+            this.label11.Text = "numele operatiei";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(977, 21);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(99, 13);
+            this.label12.TabIndex = 46;
+            this.label12.Text = "descrierea operatiei";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(148, 21);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(77, 13);
+            this.label13.TabIndex = 47;
+            this.label13.Text = "Lista operatiilor";
+            // 
             // OpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1475, 711);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.descriereOp);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -438,7 +550,6 @@
             this.Controls.Add(this.listPasiv);
             this.Controls.Add(this.listActiv);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.pasivID);
             this.Controls.Add(this.PresetBox);
             this.Controls.Add(this.listaOperatii);
@@ -467,7 +578,6 @@
         private System.Windows.Forms.ListBox listPasiv;
         private System.Windows.Forms.ListBox listActiv;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox activID;
@@ -495,6 +605,17 @@
         private System.Windows.Forms.RadioButton creditActiv;
         private System.Windows.Forms.RadioButton debitActiv;
         private System.Windows.Forms.TextBox descriereOp;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
     }
 }
 

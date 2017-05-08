@@ -39,6 +39,13 @@
             this.addActiv = new System.Windows.Forms.Button();
             this.deletePasiv = new System.Windows.Forms.Button();
             this.deleteActiv = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listaActive
@@ -50,7 +57,7 @@
             this.listaActive.TabIndex = 0;
             // 
             // listaPasive
-            //
+            // 
             this.listaPasive.FormattingEnabled = true;
             this.listaPasive.Location = new System.Drawing.Point(750, 63);
             this.listaPasive.Name = "listaPasive";
@@ -72,7 +79,7 @@
             this.addPasiv.Name = "addPasiv";
             this.addPasiv.Size = new System.Drawing.Size(87, 24);
             this.addPasiv.TabIndex = 3;
-            this.addPasiv.Text = "Add";
+            this.addPasiv.Text = "Adauga contul";
             this.addPasiv.UseVisualStyleBackColor = true;
             this.addPasiv.Click += new System.EventHandler(this.addPasiv_Click);
             // 
@@ -106,11 +113,11 @@
             // 
             // addActiv
             // 
-            this.addActiv.Location = new System.Drawing.Point(538, 430);
+            this.addActiv.Location = new System.Drawing.Point(527, 430);
             this.addActiv.Name = "addActiv";
-            this.addActiv.Size = new System.Drawing.Size(75, 23);
+            this.addActiv.Size = new System.Drawing.Size(86, 24);
             this.addActiv.TabIndex = 9;
-            this.addActiv.Text = "Add";
+            this.addActiv.Text = "Adauga contul";
             this.addActiv.UseVisualStyleBackColor = true;
             this.addActiv.Click += new System.EventHandler(this.addActiv_Click);
             // 
@@ -120,7 +127,7 @@
             this.deletePasiv.Name = "deletePasiv";
             this.deletePasiv.Size = new System.Drawing.Size(75, 23);
             this.deletePasiv.TabIndex = 10;
-            this.deletePasiv.Text = "Delete";
+            this.deletePasiv.Text = "Sterge";
             this.deletePasiv.UseVisualStyleBackColor = true;
             this.deletePasiv.Click += new System.EventHandler(this.deletePasiv_Click);
             // 
@@ -130,15 +137,85 @@
             this.deleteActiv.Name = "deleteActiv";
             this.deleteActiv.Size = new System.Drawing.Size(75, 23);
             this.deleteActiv.TabIndex = 11;
-            this.deleteActiv.Text = "Delete";
+            this.deleteActiv.Text = "Sterge";
             this.deleteActiv.UseVisualStyleBackColor = true;
             this.deleteActiv.Click += new System.EventHandler(this.deleteActiv_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(960, 47);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "PASIVE";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(339, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "ACTIVE";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(573, 471);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(277, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Lista denumiri conturi, conform planului de conturi general";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(960, 417);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "valoare";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(774, 417);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "numar cont";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(379, 418);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "valoare";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(188, 417);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "numar cont";
             // 
             // ConturiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1437, 603);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteActiv);
             this.Controls.Add(this.deletePasiv);
             this.Controls.Add(this.addActiv);
@@ -171,5 +248,12 @@
         private System.Windows.Forms.Button addActiv;
         private System.Windows.Forms.Button deletePasiv;
         private System.Windows.Forms.Button deleteActiv;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

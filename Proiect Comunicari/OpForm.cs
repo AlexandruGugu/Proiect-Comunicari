@@ -26,14 +26,18 @@ namespace Proiect_Comunicari
             InitializeComponent();
             proiect = prj;
             Show();
+            PresetBox.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            AddOp(presets[0]);
+            /*
             if (PresetBox.SelectedIndex != -1)
             {
                 AddOp(presets[PresetBox.SelectedIndex]);
             }
+            */
 
 
         }

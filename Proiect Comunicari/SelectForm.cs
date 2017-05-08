@@ -24,7 +24,7 @@ namespace Proiect_Comunicari
         public static Format FD2;
         public static Format FC1;
         public static Format FC2 = book.addFormat();
-        public static Format tabel = book.addFormat();
+        public static Format tabel;
 
         public SelectForm()
         {
@@ -69,7 +69,8 @@ namespace Proiect_Comunicari
             FC2.borderTop = libxl.BorderStyle.BORDERSTYLE_MEDIUM; 
             FC2.borderBottom = libxl.BorderStyle.BORDERSTYLE_MEDIUM;
 
-            tabel.setBorder(libxl.BorderStyle.BORDERSTYLE_MEDIUM);
+            tabel = book.addFormat();
+            tabel.setBorder(libxl.BorderStyle.BORDERSTYLE_MEDIUM);            
             //tabel.alignH = AlignH.ALIGNH_MERGE;
 
         }
@@ -314,23 +315,24 @@ namespace Proiect_Comunicari
 
         private void PrintAP(List<Cont> active, List<Cont> pasive, Sheet sheet)
         {
+            sheet.writeStr(2, 2, "ACTIVE");
+            sheet.writeStr(2, 3, "PASIVE");
             int row = 3;
             int col = 2;
             
             foreach(Cont cont in active)
             {
-                
-                sheet.setMerge(row, row, col, col + 4);
-                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString());
+                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), tabel); 
             }
+            sheet.setCol(col, -1);
             row = 3;
-            col = 7;
+            col = 3;
             foreach(Cont cont in pasive)
-            {                
-                sheet.setMerge(row, row, col, col + 4);
-                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), creditFormat);
-
+            {
+                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), tabel);                               
             }
+            sheet.setCol(col, -1);
+
         }
 
         private void print_Click(object sender, EventArgs e)
