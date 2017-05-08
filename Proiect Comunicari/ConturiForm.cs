@@ -31,6 +31,11 @@ namespace Proiect_Comunicari
                 activValoare.Hide();
                 pasivID.Hide();
                 pasivValoare.Hide();
+                label3.Hide();
+                label4.Hide();
+                label5.Hide();
+                label6.Hide();
+                label7.Hide();
                 DisplayConturi(proiect.ActiveCurente, proiect.PasiveCurente);
             }
             else
@@ -59,11 +64,17 @@ namespace Proiect_Comunicari
             listaPasive.Items.Clear();
             foreach (Cont cont in conturiActive)
             {
-                listaActive.Items.Add(cont.id + " " + cont.nume + ": " + cont.valoare);
+                if (cont.valoare != 0)
+                {
+                    listaActive.Items.Add(cont.id + " " + cont.nume + ": " + cont.valoare);
+                }
             }
             foreach (Cont cont in conturiPasive)
             {
-                listaPasive.Items.Add(cont.id + " " + cont.nume + ": " + cont.valoare);
+                if (cont.valoare != 0)
+                {
+                    listaPasive.Items.Add(cont.id + " " + cont.nume + ": " + cont.valoare);
+                }
             }
         }
 

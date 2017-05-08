@@ -74,6 +74,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.deleteOp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -508,11 +509,22 @@
             this.label13.TabIndex = 47;
             this.label13.Text = "Lista operatiilor";
             // 
+            // deleteOp
+            // 
+            this.deleteOp.Location = new System.Drawing.Point(125, 304);
+            this.deleteOp.Name = "deleteOp";
+            this.deleteOp.Size = new System.Drawing.Size(150, 23);
+            this.deleteOp.TabIndex = 48;
+            this.deleteOp.Text = "Sterge operatie";
+            this.deleteOp.UseVisualStyleBackColor = true;
+            this.deleteOp.Click += new System.EventHandler(this.deleteOp_Click);
+            // 
             // OpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1475, 711);
+            this.Controls.Add(this.deleteOp);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -616,6 +628,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button deleteOp;
     }
 }
 

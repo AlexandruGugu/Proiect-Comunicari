@@ -322,14 +322,20 @@ namespace Proiect_Comunicari
             
             foreach(Cont cont in active)
             {
-                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), tabel); 
+                if (cont.valoare != 0)
+                {
+                    sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), tabel);
+                }
             }
             sheet.setCol(col, -1);
             row = 3;
             col = 3;
             foreach(Cont cont in pasive)
             {
-                sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), tabel);                               
+                if (cont.valoare != 0)
+                {
+                    sheet.writeStr(row++, col, cont.id.ToString() + cont.nume + ": " + cont.valoare.ToString(), tabel);
+                }
             }
             sheet.setCol(col, -1);
 
@@ -349,5 +355,58 @@ namespace Proiect_Comunicari
             PrintConturi();            
             book.save(numeFisier.Text + ".xlsx");
         }
+
+        private void InchidereCheltuieli()
+        {
+            Proiect proiect = ShadowForm.proiecte.ElementAt(listBox1.SelectedIndex);
+            Operatie op = new Operatie();
+            double x = 0;
+            foreach (Cont cont in proiect.ActiveCurente)
+            {
+                if(cont.id.ToString()[0] == '6' && cont.valoare != 0)
+                {
+                    op.credit.Add(new Cont(cont));                    
+                    x += cont.valoare;
+                    cont.valoare = 0;
+                }
+            }
+            if(x == 0)
+            {
+                return;
+            }
+            op.nume = "Inchidere conturi de cheltuieli";
+            op.debit.Add(new Cont(121, x, true));
+            proiect.operatii.Add(op);
+        }
+
+        private void InchidereVenituri()
+        {
+            Proiect proiect = ShadowForm.proiecte.ElementAt(listBox1.SelectedIndex);
+            Operatie op = new Operatie();
+            double x = 0;
+            foreach (Cont cont in proiect.PasiveCurente)
+            {
+                if (cont.id.ToString()[0] == '7' && cont.valoare != 0)
+                {                   
+                    op.debit.Add(new Cont(cont));
+                    x += cont.valoare;
+                    cont.valoare = 0;
+                }
+            }
+            if(x == 0)
+            {
+                return;
+            }
+            op.nume = "Inchidere conturi de venituri";
+            op.credit.Add(new Cont(121, x, true));
+            proiect.operatii.Add(op);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            InchidereCheltuieli();
+            InchidereVenituri();
+        }
     }
+
 }
