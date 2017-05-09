@@ -114,7 +114,7 @@ namespace Proiect_Comunicari
         }
         private void addCont(double x, double id, bool activ)
         {
-            string nume = ShadowForm.conturiDic[id];
+            string nume = Manager.conturiDic[id];
             if (activ)
             {
                 if (creditActiv.Checked)
@@ -281,7 +281,7 @@ namespace Proiect_Comunicari
             double id, x;
             if(double.TryParse(activValoare.Text, out x) && double.TryParse(activID.Text, out id))
             {
-                if (!ShadowForm.conturiDic.Keys.Contains(id))
+                if (!Manager.conturiDic.Keys.Contains(id))
                 {
                     MessageBox.Show("Contul introdus nu exista");
                     return;
@@ -297,7 +297,7 @@ namespace Proiect_Comunicari
             double id, x;
             if (double.TryParse(pasivValoare.Text, out x) && double.TryParse(pasivID.Text, out id))
             {
-                if(!ShadowForm.conturiDic.Keys.Contains(id))
+                if(!Manager.conturiDic.Keys.Contains(id))
                 {
                     MessageBox.Show("Contul introdus nu exista");
                     return;
@@ -530,14 +530,14 @@ namespace Proiect_Comunicari
 
         private void OpForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ShadowForm.opForms.Remove(this);
-            ShadowForm.CheckActiveForms();
+            Manager.opForms.Remove(this);
+            Manager.CheckActiveForms();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = comboBox1.SelectedIndex;
-            Cont cont = ShadowForm.conturiLst[index];
+            Cont cont = Manager.conturiLst[index];
             if (comboBox1.SelectedItem.ToString().Contains("/"))
             {
                 DialogResult res = MessageBox.Show("Cont de activ?", "Cont bifunctional", MessageBoxButtons.YesNoCancel);
@@ -574,105 +574,10 @@ namespace Proiect_Comunicari
 
         }
     }
-    [Serializable]
-    public class Operatie
-    {
-        public string nume { get; set; }      
-        public string descriere { get; set; }
-        public List<Cont> debit { get; set; }
-        public List<Cont> credit { get; set; }
-
-        public Operatie(string Nume = "", string Descriere = "", List<Cont> Debit = null, List<Cont> Credit = null)
-        {
-            descriere = Descriere;
-            nume = Nume;
-            if(Debit == null)
-            {
-                debit = new List<Cont>();
-            }
-            else
-            {
-                foreach (Cont cont in Debit)
-                {
-                    debit.Add(new Cont(cont));     
-                }
-            }
-            if(Credit == null)
-            {
-                credit = new List<Cont>();
-            }
-            else
-            {
-                foreach (Cont cont in Credit)
-                {
-                    credit.Add(new Cont(cont));
-                }
-            }
-            
-        }
-        public Operatie(Operatie op)
-        {
-            debit = new List<Cont>();
-            credit = new List<Cont>();
-            nume = op.nume;
-            descriere = op.descriere;
-            foreach(Cont cont in op.debit)
-            {
-                debit.Add(new Cont(cont));
-            }
-            foreach(Cont cont in op.credit)
-            {
-                credit.Add(new Cont(cont));
-            }
-        }
- 
-
-    }
-    [Serializable]
-    public class Cont
-    {
-        public string nume { get; set; }
-        public double id { get; set; }
-        public bool activ { get; set; }
-        public double valoare { get; set; }
-
-        public Cont(double ID, double VALOARE, bool ACTIV, string NUME = "")
-        {
-            id = ID;
-            valoare = VALOARE;
-            activ = ACTIV;
-            nume = NUME;
-        }
-        
-        public Cont(Cont cont)
-        {
-            nume = cont.nume;
-            id = cont.id;
-            activ = cont.activ;
-            valoare = cont.valoare;
-        }
-    }
+    
 
     
-    [Serializable]
-    public class Proiect
-    {
-        public string nume;
-        public List<Operatie> operatii = new List<Operatie>();
-        public List<Operatie> presets = new List<Operatie>();
-        public List<Cont> Active = new List<Cont>();
-        public List<Cont> Pasive = new List<Cont>();
-        public List<Cont> ActiveCurente = new List<Cont>();
-        public List<Cont> PasiveCurente = new List<Cont>();
-        public int totalActive = 0;
-        public int totalPasive = 0;
-
-        public Proiect()
-        {
-            
-            
-        }
-    }
+    
     [Serializable]
     public class LoginInfo
     {

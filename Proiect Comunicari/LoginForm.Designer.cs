@@ -91,7 +91,7 @@
             this.Controls.Add(this.passTxt);
             this.Controls.Add(this.userTxt);
             this.Name = "LoginForm";
-            this.Text = "Form2";
+            this.Text = "Autentificare";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

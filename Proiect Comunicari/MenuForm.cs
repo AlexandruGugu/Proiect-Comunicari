@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using libxl;
 namespace Proiect_Comunicari
 {
-    public partial class SelectForm : Form
+    public partial class MenuForm : Form
     {
         private Dictionary<double, int> conturiDeschise = new Dictionary<double, int>();
         public static XmlBook book = new XmlBook();
@@ -26,12 +26,12 @@ namespace Proiect_Comunicari
         public static Format FC2 = book.addFormat();
         public static Format tabel;
 
-        public SelectForm()
+        public MenuForm()
         {
             InitializeComponent();
-            foreach(Proiect prj in ShadowForm.proiecte)
+            foreach(Proiect prj in Manager.proiecte)
             {
-                listBox1.Items.Add((listBox1.Items.Count + 1).ToString() + " Proiect");
+                listBox1.Items.Add(prj.nume);
             }
 
             
@@ -77,15 +77,22 @@ namespace Proiect_Comunicari
 
         private void SelectForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ShadowForm.selectForm = null;
-            ShadowForm.CheckActiveForms();
+            Manager.menuForm = null;
+            Manager.CheckActiveForms();
         }
 
         private void addPrj_Click(object sender, EventArgs e)
         {
-            ShadowForm.proiecte.Add(new Proiect());
-            ShadowForm.proiecte[ShadowForm.proiecte.Count - 1].nume = "Proiect nou " + listBox1.Items.Count;
-            listBox1.Items.Add((listBox1.Items.Count + 1).ToString() + " Proiect");
+            Manager.proiecte.Add(new Proiect());
+            if (textBox1.Text != String.Empty)
+            {
+                Manager.proiecte[Manager.proiecte.Count - 1].nume = textBox1.Text;
+            }
+            else
+            {
+                Manager.proiecte[Manager.proiecte.Count - 1].nume = "Proiect nou";
+            }
+            listBox1.Items.Add(Manager.proiecte[Manager.proiecte.Count - 1].nume);
         }
 
         private void openOp_Click(object sender, EventArgs e)
@@ -94,7 +101,7 @@ namespace Proiect_Comunicari
             {
                 return;
             }
-            ShadowForm.OpenOp(listBox1.SelectedIndex);
+            Manager.OpenOp(listBox1.SelectedIndex);
         }
 
         private void openConturi_Click(object sender, EventArgs e)
@@ -103,7 +110,7 @@ namespace Proiect_Comunicari
             {
                 return;
             }
-            ShadowForm.OpenConturi(listBox1.SelectedIndex);
+            Manager.OpenConturi(listBox1.SelectedIndex);
         }
 
         private void delPrj_Click(object sender, EventArgs e)
@@ -112,24 +119,24 @@ namespace Proiect_Comunicari
             listBox1.Items.RemoveAt(index);
             OpForm i;
             ConturiForm j;
-            if ((i = ShadowForm.opForms.Find(p => ReferenceEquals(p.proiect, ShadowForm.proiecte.ElementAt(index)))) != null)
+            if ((i = Manager.opForms.Find(p => ReferenceEquals(p.proiect, Manager.proiecte.ElementAt(index)))) != null)
             {
                 MessageBox.Show("Fereastra este deja deschisa");
                 i.Close();
-                ShadowForm.opForms.Remove(i);
+                Manager.opForms.Remove(i);
             }
-            if ((j = ShadowForm.contForms.Find(p => ReferenceEquals(p.proiect, ShadowForm.proiecte.ElementAt(index)))) != null)
+            if ((j = Manager.contForms.Find(p => ReferenceEquals(p.proiect, Manager.proiecte.ElementAt(index)))) != null)
             {
                 MessageBox.Show("Fereastra este deja deschisa");
                 j.Close();
-                ShadowForm.contForms.Remove(j);
+                Manager.contForms.Remove(j);
             }
-            ShadowForm.proiecte.RemoveAt(index);
+            Manager.proiecte.RemoveAt(index);
         }
 
         public void PrintConturi()
         {
-            Proiect proiect = ShadowForm.proiecte.ElementAt(listBox1.SelectedIndex);           
+            Proiect proiect = Manager.proiecte.ElementAt(listBox1.SelectedIndex);           
             foreach(Cont cont in proiect.Active)
             {               
                 DeschideCont(cont);
@@ -349,7 +356,7 @@ namespace Proiect_Comunicari
                 numeFisier.Focus();
             }
 
-            Proiect proiect = ShadowForm.proiecte.ElementAt(listBox1.SelectedIndex);
+            Proiect proiect = Manager.proiecte.ElementAt(listBox1.SelectedIndex);
             PrintAP(proiect.Active, proiect.Pasive, APInitial);
             PrintAP(proiect.ActiveCurente, proiect.PasiveCurente, APFinal);
             PrintConturi();            
@@ -358,7 +365,7 @@ namespace Proiect_Comunicari
 
         private void InchidereCheltuieli()
         {
-            Proiect proiect = ShadowForm.proiecte.ElementAt(listBox1.SelectedIndex);
+            Proiect proiect = Manager.proiecte.ElementAt(listBox1.SelectedIndex);
             Operatie op = new Operatie();
             double x = 0;
             foreach (Cont cont in proiect.ActiveCurente)
@@ -381,7 +388,7 @@ namespace Proiect_Comunicari
 
         private void InchidereVenituri()
         {
-            Proiect proiect = ShadowForm.proiecte.ElementAt(listBox1.SelectedIndex);
+            Proiect proiect = Manager.proiecte.ElementAt(listBox1.SelectedIndex);
             Operatie op = new Operatie();
             double x = 0;
             foreach (Cont cont in proiect.PasiveCurente)

@@ -567,7 +567,7 @@
             this.Controls.Add(this.listaOperatii);
             this.Controls.Add(this.button1);
             this.Name = "OpForm";
-            this.Text = "Pasiv";
+            this.Text = "op";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OpForm_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();

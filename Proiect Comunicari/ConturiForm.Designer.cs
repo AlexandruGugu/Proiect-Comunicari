@@ -228,7 +228,7 @@
             this.Controls.Add(this.listaPasive);
             this.Controls.Add(this.listaActive);
             this.Name = "ConturiForm";
-            this.Text = "ConturiForm";
+            this.Text = "Conturi";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConturiForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

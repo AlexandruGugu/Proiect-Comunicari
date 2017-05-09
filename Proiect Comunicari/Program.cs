@@ -16,7 +16,7 @@ namespace Proiect_Comunicari
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new ShadowForm();
+            new Manager();
             Application.Run();
         }
     }

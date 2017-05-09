@@ -49,11 +49,11 @@ namespace Proiect_Comunicari
         {
             if (activ)
             {
-                proiect.Active.Add(new Cont(id, valoare, activ, ShadowForm.conturiDic[id]));
+                proiect.Active.Add(new Cont(id, valoare, activ, Manager.conturiDic[id]));
             }
             else
             {
-                proiect.Pasive.Add(new Cont(id, valoare, activ, ShadowForm.conturiDic[id]));
+                proiect.Pasive.Add(new Cont(id, valoare, activ, Manager.conturiDic[id]));
             }
             DisplayConturi(proiect.Active, proiect.Pasive);
         }
@@ -103,14 +103,14 @@ namespace Proiect_Comunicari
                     proiect.PasiveCurente.Add(new Cont(cont));
                 }
             }
-            ShadowForm.contForms.Remove(this);
-            ShadowForm.CheckActiveForms();
+            Manager.contForms.Remove(this);
+            Manager.CheckActiveForms();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = comboBox1.SelectedIndex;
-            Cont cont = ShadowForm.conturiLst[index];
+            Cont cont = Manager.conturiLst[index];
             if (comboBox1.SelectedItem.ToString().Contains("/"))
             {
                 DialogResult res = MessageBox.Show("Cont de activ?", "Cont bifunctional", MessageBoxButtons.YesNoCancel);
@@ -142,7 +142,7 @@ namespace Proiect_Comunicari
             double id, x;
             if (double.TryParse(activValoare.Text, out x) && double.TryParse(activID.Text, out id))
             {
-                if (!ShadowForm.conturiDic.Keys.Contains(id))
+                if (!Manager.conturiDic.Keys.Contains(id))
                 {
                     MessageBox.Show("Contul introdus nu exista");
                     return;
@@ -169,7 +169,7 @@ namespace Proiect_Comunicari
             double id, x;
             if (double.TryParse(pasivValoare.Text, out x) && double.TryParse(pasivID.Text, out id))
             {
-                if (!ShadowForm.conturiDic.Keys.Contains(id))
+                if (!Manager.conturiDic.Keys.Contains(id))
                 {
                     MessageBox.Show("Contul introdus nu exista");
                     return;

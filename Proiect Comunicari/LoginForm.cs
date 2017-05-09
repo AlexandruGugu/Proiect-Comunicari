@@ -27,15 +27,15 @@ namespace Proiect_Comunicari
             if(info.checkInfo(new KeyValuePair<string, string>(userTxt.Text, passTxt.Text)))
             {
                 this.Hide();
-                ShadowForm.Authenticated();
+                Manager.Authenticated();
             }
 
         }
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ShadowForm.loginForm = null;
-            ShadowForm.CheckActiveForms();
+            Manager.loginForm = null;
+            Manager.CheckActiveForms();
         }
 
         private void userTxt_KeyPress(object sender, KeyPressEventArgs e)
